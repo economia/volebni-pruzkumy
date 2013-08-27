@@ -43,6 +43,9 @@
       var x$, y$, this$ = this;
       x$ = this.datapaths.selectAll('path').data(this.lines).enter();
       y$ = x$.append('path');
+      y$.attr('class', function(line){
+        return line.partyId + " " + line.agencyId;
+      });
       y$.attr('d', function(line){
         return this$.line(line.datapoints);
       });

@@ -32,6 +32,7 @@ window.Graph = class Graph
             .data @lines
             .enter!
                 ..append \path
+                    ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
                     ..attr \d (line) ~>
                         @line line.datapoints
                     ..attr \data-tooltip (line) ->

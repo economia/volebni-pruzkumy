@@ -13,6 +13,30 @@ body svg .datapaths path {
   stroke: #f00;
   stroke-width: 2px;
 }
+body svg .datapaths path.cssd {
+  stroke: #f29400;
+}
+body svg .datapaths path.vv {
+  stroke: #84d0f1;
+}
+body svg .datapaths path.spoz {
+  stroke: #fb9a99;
+}
+body svg .datapaths path.ods {
+  stroke: #006ab3;
+}
+body svg .datapaths path.top {
+  stroke: #7c0042;
+}
+body svg .datapaths path.sz {
+  stroke: #00ad00;
+}
+body svg .datapaths path.kscm {
+  stroke: #e3001a;
+}
+body svg .datapaths path.kdu {
+  stroke: #000;
+}
 body svg .datapaths path:hover {
   stroke: #008000;
 }
