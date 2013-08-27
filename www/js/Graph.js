@@ -30,6 +30,7 @@
       z1$.domain([this.min_date, this.max_date]);
       z1$.range([0, this.width]);
       z2$ = this.scale_y = d3.scale.linear();
+      z2$.domain([0, 100]);
       z2$.range([this.height, 0]);
       z3$ = this.line = d3.svg.line();
       z3$.x(function(it){
@@ -41,21 +42,23 @@
       this.draw();
     }
     prototype.draw = function(){
-      var lines, maxValue, selection;
+      var lines, maxValue, ref$, _, lastMaxValue, scaleIsExpanding, selection;
       lines = this.lines.filter(bind$(this, 'lineFilter'));
       maxValue = Math.max.apply(Math, lines.map(function(it){
         return it.maxValue;
       }));
+      ref$ = this.scale_y.domain(), _ = ref$[0], lastMaxValue = ref$[1];
+      scaleIsExpanding = lastMaxValue && lastMaxValue < maxValue;
       this.scale_y.domain([0, maxValue]);
       selection = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
       });
-      this.selectionUpdate(selection);
+      this.selectionUpdate(selection, scaleIsExpanding);
       this.selectionExit(selection.exit());
-      return this.selectionEnter(selection.enter());
+      return this.selectionEnter(selection.enter(), scaleIsExpanding);
     };
-    prototype.selectionEnter = function(selection){
-      var maxLen, x$, path, y$, z$, this$ = this;
+    prototype.selectionEnter = function(selection, scaleIsExpanding){
+      var maxLen, x$, path, y$, transition, this$ = this;
       maxLen = 0;
       x$ = path = selection.append('path');
       x$.attr('class', function(line){
@@ -76,26 +79,27 @@
         }
         return "0, " + len;
       });
-      y$ = path;
-      z$ = y$.transition();
-      z$.duration(800);
-      z$.attr('stroke-dasharray', function(){
+      y$ = transition = path.transition();
+      y$.duration(800);
+      y$.attr('stroke-dasharray', function(){
         var len;
         len = this.getTotalLength();
         return len + ", 0";
       });
-      return y$;
+      if (scaleIsExpanding) {
+        return transition.delay(400);
+      }
     };
-    prototype.selectionUpdate = function(selection){
-      var x$, y$, this$ = this;
-      x$ = selection;
-      y$ = x$.transition();
-      y$.delay(500);
-      y$.duration(500);
-      y$.attr('d', function(line){
+    prototype.selectionUpdate = function(selection, scaleIsExpanding){
+      var x$, transition, this$ = this;
+      x$ = transition = selection.transition();
+      x$.duration(500);
+      x$.attr('d', function(line){
         return this$.line(line.datapoints);
       });
-      return x$;
+      if (!scaleIsExpanding) {
+        return transition.delay(500);
+      }
     };
     prototype.selectionExit = function(selection){
       var x$, y$;

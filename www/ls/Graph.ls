@@ -22,6 +22,7 @@ window.Graph = class Graph
             ..domain [@min_date, @max_date]
             ..range [0 @width]
         @scale_y = d3.scale.linear!
+            ..domain [0 100]
             ..range [@height, 0]
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
@@ -31,15 +32,17 @@ window.Graph = class Graph
     draw: ->
         lines = @lines.filter @~lineFilter
         maxValue = Math.max ...lines.map (.maxValue)
+        [_, lastMaxValue] = @scale_y.domain!
+        scaleIsExpanding = lastMaxValue and lastMaxValue < maxValue
         @scale_y.domain [0 maxValue]
         selection = @datapaths.selectAll \path
             .data lines, (.id)
-        @selectionUpdate selection
+        @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
-        @selectionEnter selection.enter!
+        @selectionEnter selection.enter!, scaleIsExpanding
 
 
-    selectionEnter: (selection) ->
+    selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
         path = selection.append \path
             ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
@@ -52,20 +55,21 @@ window.Graph = class Graph
                 len = @getTotalLength!
                 if len > maxLen then maxLen := len
                 "0, #len"
-        path
-            ..transition!
-                ..duration 800
-                ..attr \stroke-dasharray ->
-                    len = @getTotalLength!
-                    "#len, 0"
+        transition = path.transition!
+            ..duration 800
+            ..attr \stroke-dasharray ->
+                len = @getTotalLength!
+                "#len, 0"
+        if scaleIsExpanding
+            transition.delay 400
 
-    selectionUpdate: (selection) ->
-        selection
-            ..transition!
-                ..delay 500
-                ..duration 500
-                ..attr \d (line) ~>
-                    @line line.datapoints
+    selectionUpdate: (selection, scaleIsExpanding) ->
+        transition = selection.transition!
+            ..duration 500
+            ..attr \d (line) ~>
+                @line line.datapoints
+        if !scaleIsExpanding
+            transition.delay 500
 
     selectionExit: (selection) ->
         selection
