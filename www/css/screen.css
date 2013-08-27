@@ -8,6 +8,13 @@ body a img {
 body #wrap {
   width: 650px;
 }
+body #wrap .selectors > div {
+  float: left;
+  clear: left;
+}
+body #wrap .selectors .pair {
+  float: left;
+}
 body svg .datapaths path {
   fill: none;
   stroke: #f00;
