@@ -28,17 +28,25 @@ window.Graph = class Graph
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @draw!
+        <~ setTimeout _, 500
+        @display_parties = <[ cssd ]>
+        @draw!
 
     draw: ->
         lines = @lines.filter @~lineFilter
-        @datapaths.selectAll \path
+        selection = @datapaths.selectAll \path
             .data lines, (.id)
-            .enter!
-                ..append \path
-                    ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
-                    ..attr \d (line) ~>
-                        @line line.datapoints
-                    ..attr \data-tooltip (line) ->
-                        line.id
+        @selectionEnter selection.enter!
+
+    selectionEnter: (selection) ->
+        selection.append \path
+            ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
+            ..attr \d (line) ~>
+                @line line.datapoints
+            ..attr \data-tooltip (line) ->
+                line.id
+
+    selectionUpdate: (selection) ->
+
     lineFilter: (line) ->
         line.agencyId in @display_agencies and line.partyId in @display_parties

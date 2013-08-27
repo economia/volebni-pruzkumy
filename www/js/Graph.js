@@ -40,25 +40,34 @@
         return this$.scale_y(it.percent);
       });
       this.draw();
+      setTimeout(function(){
+        this$.display_parties = ['cssd'];
+        return this$.draw();
+      }, 500);
     }
     prototype.draw = function(){
-      var lines, x$, y$, this$ = this;
+      var lines, selection;
       lines = this.lines.filter(bind$(this, 'lineFilter'));
-      x$ = this.datapaths.selectAll('path').data(lines, function(it){
+      selection = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
-      }).enter();
-      y$ = x$.append('path');
-      y$.attr('class', function(line){
+      });
+      return this.selectionEnter(selection.enter());
+    };
+    prototype.selectionEnter = function(selection){
+      var x$, this$ = this;
+      x$ = selection.append('path');
+      x$.attr('class', function(line){
         return line.partyId + " " + line.agencyId;
       });
-      y$.attr('d', function(line){
+      x$.attr('d', function(line){
         return this$.line(line.datapoints);
       });
-      y$.attr('data-tooltip', function(line){
+      x$.attr('data-tooltip', function(line){
         return line.id;
       });
       return x$;
     };
+    prototype.selectionUpdate = function(selection){};
     prototype.lineFilter = function(line){
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
     };
