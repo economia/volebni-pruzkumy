@@ -11,7 +11,7 @@ body #wrap {
 body svg .datapaths path {
   fill: none;
   stroke: #f00;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 body svg .datapaths path.cssd {
   stroke: #f29400;
