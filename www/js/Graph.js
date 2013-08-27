@@ -9,13 +9,12 @@
       this.lines = lines;
       this.width = 630;
       this.height = 600;
-      this.margin_top = 20;
-      this.margin_left = 20;
+      this.margin = [20, 0, 0, 20];
       x$ = this.svg = d3.select(parentSelector).append('svg');
-      x$.attr('height', this.height + this.margin_top);
-      x$.attr('width', this.width + this.margin_left);
+      x$.attr('height', this.height + this.margin[0] + this.margin[2]);
+      x$.attr('width', this.width + this.margin[1] + this.margin[3]);
       y$ = this.drawing = this.svg.append('g');
-      y$.attr('transform', "translate(" + this.margin_left + ", " + this.margin_top + ")");
+      y$.attr('transform', "translate(" + this.margin[3] + ", " + this.margin[0] + ")");
       y$.attr('class', 'drawing');
       z$ = this.datapaths = this.drawing.append('g');
       z$.attr('class', 'datapaths');

@@ -2,13 +2,12 @@ window.Graph = class Graph
     (@parentSelector, @lines) ->
         @width = 630_px
         @height = 600_px
-        @margin_top = 20_px
-        @margin_left = 20_px
+        @margin = [20 0 0 20] # trbl
         @svg = d3.select parentSelector .append \svg
-            ..attr \height @height + @margin_top
-            ..attr \width  @width + @margin_left
+            ..attr \height @height + @margin.0 + @margin.2
+            ..attr \width  @width + @margin.1 + @margin.3
         @drawing = @svg.append \g
-            ..attr \transform "translate(#{@margin_left}, #{@margin_top})"
+            ..attr \transform "translate(#{@margin.3}, #{@margin.0})"
             ..attr \class \drawing
         @datapaths = @drawing.append \g
             ..attr \class \datapaths
