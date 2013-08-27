@@ -1,5 +1,5 @@
 (function(){
-  var parties_to_ids, Datapoint, Line;
+  var parties_to_ids, agencies_to_ids, Datapoint, Line;
   new Tooltip().watchElements();
   window.datapoints = [];
   window.lines = [];
@@ -12,6 +12,12 @@
     "SZ": 'sz',
     "KSČM": 'kscm',
     "KDU-ČSL": 'kdu'
+  };
+  agencies_to_ids = {
+    "Median": 'median',
+    "STEM": 'stem',
+    "Factum": 'factum',
+    "CVVM": 'cvvm'
   };
   window.init = function(data){
     var lines_assoc, datapoints;
@@ -60,6 +66,7 @@
       this.agency = agency;
       this.datapoints = [];
       this.partyId = parties_to_ids[this.party];
+      this.agencyId = agencies_to_ids[this.agency];
     }
     prototype.sortDatapoints = function(){
       return this.datapoints.sort(function(a, b){

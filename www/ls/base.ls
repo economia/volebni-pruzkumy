@@ -10,7 +10,11 @@ parties_to_ids =
     "SZ" : \sz
     "KSČM" : \kscm
     "KDU-ČSL" : \kdu
-
+agencies_to_ids =
+    "Median": \median
+    "STEM": \stem
+    "Factum": \factum
+    "CVVM": \cvvm
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([party, date, percent, agency]) ->
@@ -37,6 +41,8 @@ class Line
     (@id, @party, @agency) ->
         @datapoints = []
         @partyId = parties_to_ids[@party]
+        @agencyId = agencies_to_ids[@agency]
+
     sortDatapoints: ->
         @datapoints.sort (a, b) ->
             a.date.getTime! - b.date.getTime!
