@@ -27,14 +27,15 @@ window.Graph = class Graph
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
-        @display_parties = <[ cssd ]>
+        # @display_parties = <[ cssd ]>
         @draw!
-        <~ setTimeout _, 1200
-        @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
-        @draw!
-        <~ setTimeout _, 1200
-        @display_parties  = <[ods]>
-        @draw!
+        @setupZoom!
+        # <~ setTimeout _, 1200
+        # @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
+        # @draw!
+        # <~ setTimeout _, 1200
+        # @display_parties  = <[ods]>
+        # @draw!
 
     draw: ->
         lines = @lines.filter @~lineFilter
@@ -42,6 +43,7 @@ window.Graph = class Graph
             .data lines, (.id)
         @selectionEnter selection.enter!
         @selectionExit selection.exit!
+
 
     selectionEnter: (selection) ->
         maxLen = 0
@@ -74,3 +76,16 @@ window.Graph = class Graph
 
     lineFilter: (line) ->
         line.agencyId in @display_agencies and line.partyId in @display_parties
+
+    setupZoom: ->
+        @zoom = d3.behavior.zoom!
+            ..x @scale_x
+            ..y @scale_y
+            ..scaleExtent [1 2]
+            ..on \zoom @~onZoom
+        @svg
+            ..call @zoom
+
+    onZoom: ->
+        @drawing
+            ..attr \transform "translate(#{d3.event.translate}) scale(#{d3.event.scale})"

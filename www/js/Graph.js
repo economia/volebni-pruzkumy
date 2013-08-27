@@ -39,16 +39,8 @@
       z3$.y(function(it){
         return this$.scale_y(it.percent);
       });
-      this.display_parties = ['cssd'];
       this.draw();
-      setTimeout(function(){
-        this$.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
-        this$.draw();
-        return setTimeout(function(){
-          this$.display_parties = ['ods'];
-          return this$.draw();
-        }, 1200);
-      }, 1200);
+      this.setupZoom();
     }
     prototype.draw = function(){
       var lines, selection;
@@ -104,6 +96,23 @@
     };
     prototype.lineFilter = function(line){
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
+    };
+    prototype.setupZoom = function(){
+      var x$, y$;
+      x$ = this.zoom = d3.behavior.zoom();
+      x$.x(this.scale_x);
+      x$.y(this.scale_y);
+      x$.scaleExtent([1, 2]);
+      x$.on('zoom', bind$(this, 'onZoom'));
+      y$ = this.svg;
+      y$.call(this.zoom);
+      return y$;
+    };
+    prototype.onZoom = function(){
+      var x$;
+      x$ = this.drawing;
+      x$.attr('transform', "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+      return x$;
     };
     return Graph;
   }());
