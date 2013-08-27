@@ -41,7 +41,9 @@
     }
     prototype.draw = function(){
       var x$, y$, this$ = this;
-      x$ = this.datapaths.selectAll('path').data(this.lines).enter();
+      x$ = this.datapaths.selectAll('path').data(this.lines, function(it){
+        return it.id;
+      }).enter();
       y$ = x$.append('path');
       y$.attr('class', function(line){
         return line.partyId + " " + line.agencyId;

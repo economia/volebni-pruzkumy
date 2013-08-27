@@ -29,7 +29,7 @@ window.Graph = class Graph
 
     draw: ->
         @datapaths.selectAll \path
-            .data @lines
+            .data @lines, (.id)
             .enter!
                 ..append \path
                     ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
