@@ -35,3 +35,5 @@ window.Graph = class Graph
                 ..append \path
                     ..attr \d (line) ~>
                         @line line.datapoints
+                    ..attr \data-tooltip (line) ->
+                        line.id

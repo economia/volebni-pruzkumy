@@ -47,6 +47,9 @@
       y$.attr('d', function(line){
         return this$.line(line.datapoints);
       });
+      y$.attr('data-tooltip', function(line){
+        return line.id;
+      });
       return x$;
     };
     return Graph;

@@ -13,3 +13,6 @@ body svg .datapaths path {
   stroke: #f00;
   stroke-width: 2px;
 }
+body svg .datapaths path:hover {
+  stroke: #008000;
+}

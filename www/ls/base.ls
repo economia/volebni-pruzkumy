@@ -1,3 +1,4 @@
+new Tooltip!watchElements!
 window.datapoints = []
 window.lines = []
 window.init = (data) ->

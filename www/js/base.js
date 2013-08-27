@@ -1,5 +1,6 @@
 (function(){
   var Datapoint, Line;
+  new Tooltip().watchElements();
   window.datapoints = [];
   window.lines = [];
   window.init = function(data){
