@@ -35,7 +35,7 @@ window.Graph = class Graph
         [_, lastMaxValue] = @scale_y.domain!
         scaleIsExpanding = lastMaxValue and lastMaxValue < maxValue
         @scale_y.domain [0 maxValue]
-        selection = @datapaths.selectAll \path
+        selection = @datapaths.selectAll \path.active
             .data lines, (.id)
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
@@ -45,7 +45,7 @@ window.Graph = class Graph
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
         path = selection.append \path
-            ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
+            ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active"
             ..attr \d (line) ~>
                 @line line.datapoints
             ..attr \data-tooltip (line) ->
@@ -74,6 +74,7 @@ window.Graph = class Graph
     selectionExit: (selection) ->
         selection
             ..attr \opacity 1
+            ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
             ..transition!
                 ..duration 800
                 ..attr \opacity 0

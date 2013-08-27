@@ -50,7 +50,7 @@
       ref$ = this.scale_y.domain(), _ = ref$[0], lastMaxValue = ref$[1];
       scaleIsExpanding = lastMaxValue && lastMaxValue < maxValue;
       this.scale_y.domain([0, maxValue]);
-      selection = this.datapaths.selectAll('path').data(lines, function(it){
+      selection = this.datapaths.selectAll('path.active').data(lines, function(it){
         return it.id;
       });
       this.selectionUpdate(selection, scaleIsExpanding);
@@ -62,7 +62,7 @@
       maxLen = 0;
       x$ = path = selection.append('path');
       x$.attr('class', function(line){
-        return line.partyId + " " + line.agencyId;
+        return line.partyId + " " + line.agencyId + " active";
       });
       x$.attr('d', function(line){
         return this$.line(line.datapoints);
@@ -105,6 +105,9 @@
       var x$, y$;
       x$ = selection;
       x$.attr('opacity', 1);
+      x$.attr('class', function(line){
+        return line.partyId + " " + line.agencyId;
+      });
       y$ = x$.transition();
       y$.duration(800);
       y$.attr('opacity', 0);
