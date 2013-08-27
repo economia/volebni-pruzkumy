@@ -5,3 +5,4 @@ window.Graph = class Graph
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height
             ..attr \width  @width
+        console.log @lines

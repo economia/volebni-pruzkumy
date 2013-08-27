@@ -12,6 +12,7 @@
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height);
       x$.attr('width', this.width);
+      console.log(this.lines);
     }
     return Graph;
   }());

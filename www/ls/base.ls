@@ -11,7 +11,8 @@ window.init = (data) ->
             lines.push line
         line.datapoints.push datapoint
         datapoint
-    window.graph = new Graph '#wrap'
+    lines.forEach -> it.sortDatapoints!
+    window.graph = new Graph '#wrap' lines
 
 class Datapoint
     ([@party, date, percent, @agency])->
@@ -22,3 +23,6 @@ class Datapoint
 class Line
     (@id, @party, @agency) ->
         @datapoints = []
+    sortDatapoints: ->
+        @datapoints.sort (a, b) ->
+            a.date.getTime! - b.date.getTime!

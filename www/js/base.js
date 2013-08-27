@@ -18,7 +18,10 @@
       line.datapoints.push(datapoint);
       return datapoint;
     });
-    return window.graph = new Graph('#wrap');
+    lines.forEach(function(it){
+      return it.sortDatapoints();
+    });
+    return window.graph = new Graph('#wrap', lines);
   };
   Datapoint = (function(){
     Datapoint.displayName = 'Datapoint';
@@ -41,6 +44,11 @@
       this.agency = agency;
       this.datapoints = [];
     }
+    prototype.sortDatapoints = function(){
+      return this.datapoints.sort(function(a, b){
+        return a.date.getTime() - b.date.getTime();
+      });
+    };
     return Line;
   }());
 }).call(this);
