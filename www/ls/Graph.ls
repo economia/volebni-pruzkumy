@@ -27,22 +27,19 @@ window.Graph = class Graph
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
-        # @display_parties = <[ cssd ]>
         @draw!
-        @setupZoom!
-        # <~ setTimeout _, 1200
-        # @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
-        # @draw!
-        # <~ setTimeout _, 1200
-        # @display_parties  = <[ods]>
-        # @draw!
+        @scale_y
+            ..domain [0 30]
+        <~ setTimeout _, 1200
+        @draw!
 
     draw: ->
         lines = @lines.filter @~lineFilter
         selection = @datapaths.selectAll \path
             .data lines, (.id)
-        @selectionEnter selection.enter!
+        @selectionUpdate selection
         @selectionExit selection.exit!
+        @selectionEnter selection.enter!
 
 
     selectionEnter: (selection) ->
@@ -66,6 +63,12 @@ window.Graph = class Graph
                     "#len, 0"
 
     selectionUpdate: (selection) ->
+        selection
+            ..transition!
+                ..duration 500
+                ..attr \d (line) ~>
+                    @line line.datapoints
+
     selectionExit: (selection) ->
         selection
             ..attr \opacity 1

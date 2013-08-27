@@ -4,7 +4,7 @@
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
     function Graph(parentSelector, lines){
-      var x$, y$, z$, z1$, z2$, z3$, this$ = this;
+      var x$, y$, z$, z1$, z2$, z3$, z4$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
@@ -40,7 +40,11 @@
         return this$.scale_y(it.percent);
       });
       this.draw();
-      this.setupZoom();
+      z4$ = this.scale_y;
+      z4$.domain([0, 30]);
+      setTimeout(function(){
+        return this$.draw();
+      }, 1200);
     }
     prototype.draw = function(){
       var lines, selection;
@@ -48,8 +52,9 @@
       selection = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
       });
-      this.selectionEnter(selection.enter());
-      return this.selectionExit(selection.exit());
+      this.selectionUpdate(selection);
+      this.selectionExit(selection.exit());
+      return this.selectionEnter(selection.enter());
     };
     prototype.selectionEnter = function(selection){
       var maxLen, x$, path, y$, z$, this$ = this;
@@ -83,7 +88,16 @@
       });
       return y$;
     };
-    prototype.selectionUpdate = function(selection){};
+    prototype.selectionUpdate = function(selection){
+      var x$, y$, this$ = this;
+      x$ = selection;
+      y$ = x$.transition();
+      y$.duration(500);
+      y$.attr('d', function(line){
+        return this$.line(line.datapoints);
+      });
+      return x$;
+    };
     prototype.selectionExit = function(selection){
       var x$, y$;
       x$ = selection;
