@@ -4,7 +4,7 @@
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
     function Graph(parentSelector, lines){
-      var x$, y$;
+      var x$, y$, z$;
       this.parentSelector = parentSelector;
       this.lines = lines;
       this.width = 500;
@@ -21,7 +21,9 @@
       y$ = this.scale_x = d3.scale.linear();
       y$.domain([this.min_date, this.max_date]);
       y$.range([0, this.width]);
-      console.log(this.lines);
+      z$ = this.scale_y = d3.scale.linear();
+      z$.domain([0, 100]);
+      z$.range([this.height, 0]);
     }
     return Graph;
   }());

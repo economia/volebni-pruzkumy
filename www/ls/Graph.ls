@@ -12,5 +12,7 @@ window.Graph = class Graph
         @scale_x = d3.scale.linear!
             ..domain [@min_date, @max_date]
             ..range [0 @width]
+        @scale_y = d3.scale.linear!
+            ..domain [0 100]
+            ..range [@height, 0]
 
-        console.log @lines
