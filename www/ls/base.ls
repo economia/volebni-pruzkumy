@@ -11,6 +11,7 @@ window.init = (data) ->
             lines.push line
         line.datapoints.push datapoint
         datapoint
+    window.graph = new Graph '#wrap'
 
 class Datapoint
     ([@party, date, percent, @agency])->

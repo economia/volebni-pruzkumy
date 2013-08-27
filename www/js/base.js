@@ -5,7 +5,7 @@
   window.init = function(data){
     var lines_assoc, datapoints;
     lines_assoc = {};
-    return datapoints = data.pruzkumy.map(function(datum){
+    datapoints = data.pruzkumy.map(function(datum){
       var party, date, percent, agency, datapoint, line;
       party = datum[0], date = datum[1], percent = datum[2], agency = datum[3];
       datapoint = new Datapoint(datum);
@@ -18,6 +18,7 @@
       line.datapoints.push(datapoint);
       return datapoint;
     });
+    return window.graph = new Graph('#wrap');
   };
   Datapoint = (function(){
     Datapoint.displayName = 'Datapoint';
