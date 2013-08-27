@@ -27,9 +27,13 @@ window.Graph = class Graph
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
-        @draw!
-        <~ setTimeout _, 500
         @display_parties = <[ cssd ]>
+        @draw!
+        <~ setTimeout _, 1200
+        @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
+        @draw!
+        <~ setTimeout _, 1200
+        @display_parties  = <[ods]>
         @draw!
 
     draw: ->
@@ -40,12 +44,24 @@ window.Graph = class Graph
         @selectionExit selection.exit!
 
     selectionEnter: (selection) ->
-        selection.append \path
+        maxLen = 0
+        path = selection.append \path
             ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
             ..attr \d (line) ~>
                 @line line.datapoints
             ..attr \data-tooltip (line) ->
                 line.id
+            ..attr \pathLength \10
+            ..attr \stroke-dasharray ->
+                len = @getTotalLength!
+                if len > maxLen then maxLen := len
+                "0, #len"
+        path
+            ..transition!
+                ..duration 800
+                ..attr \stroke-dasharray ->
+                    len = @getTotalLength!
+                    "#len, 0"
 
     selectionUpdate: (selection) ->
     selectionExit: (selection) ->

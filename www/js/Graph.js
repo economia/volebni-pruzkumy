@@ -39,11 +39,16 @@
       z3$.y(function(it){
         return this$.scale_y(it.percent);
       });
+      this.display_parties = ['cssd'];
       this.draw();
       setTimeout(function(){
-        this$.display_parties = ['cssd'];
-        return this$.draw();
-      }, 500);
+        this$.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
+        this$.draw();
+        return setTimeout(function(){
+          this$.display_parties = ['ods'];
+          return this$.draw();
+        }, 1200);
+      }, 1200);
     }
     prototype.draw = function(){
       var lines, selection;
@@ -55,8 +60,9 @@
       return this.selectionExit(selection.exit());
     };
     prototype.selectionEnter = function(selection){
-      var x$, this$ = this;
-      x$ = selection.append('path');
+      var maxLen, x$, path, y$, z$, this$ = this;
+      maxLen = 0;
+      x$ = path = selection.append('path');
       x$.attr('class', function(line){
         return line.partyId + " " + line.agencyId;
       });
@@ -66,7 +72,24 @@
       x$.attr('data-tooltip', function(line){
         return line.id;
       });
-      return x$;
+      x$.attr('pathLength', '10');
+      x$.attr('stroke-dasharray', function(){
+        var len;
+        len = this.getTotalLength();
+        if (len > maxLen) {
+          maxLen = len;
+        }
+        return "0, " + len;
+      });
+      y$ = path;
+      z$ = y$.transition();
+      z$.duration(800);
+      z$.attr('stroke-dasharray', function(){
+        var len;
+        len = this.getTotalLength();
+        return len + ", 0";
+      });
+      return y$;
     };
     prototype.selectionUpdate = function(selection){};
     prototype.selectionExit = function(selection){
