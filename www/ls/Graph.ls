@@ -5,4 +5,12 @@ window.Graph = class Graph
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height
             ..attr \width  @width
+        @min_date = Math.min ...@lines.map ->
+             it.datapoints[0].date.getTime!
+        @max_date = Math.max ...@lines.map ->
+             it.datapoints[it.datapoints.length - 1].date.getTime!
+        @scale_x = d3.scale.linear!
+            ..domain [@min_date, @max_date]
+            ..range [0 @width]
+
         console.log @lines
