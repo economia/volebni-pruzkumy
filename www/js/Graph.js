@@ -4,7 +4,7 @@
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
     function Graph(parentSelector, lines){
-      var x$, y$, z$, z1$, z2$, z3$, z4$, this$ = this;
+      var x$, y$, z$, z1$, z2$, z3$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
@@ -39,12 +39,6 @@
         return this$.scale_y(it.percent);
       });
       this.draw();
-      z4$ = this.scale_y;
-      z4$.domain([0, 30]);
-      setTimeout(function(){
-        this$.display_parties = ['vv', 'spoz', 'sz', 'kscm', 'kdu'];
-        return this$.draw();
-      }, 1200);
     }
     prototype.draw = function(){
       var lines, maxValue, selection;

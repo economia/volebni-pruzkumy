@@ -29,7 +29,44 @@ window.init = (data) ->
         line.datapoints.push datapoint
         datapoint
     lines.forEach -> it.processDatapoints!
+    generateSelectors!
+
     window.graph = new Graph '#wrap' lines
+
+generateSelectors = ->
+    $selectors = $ "<div class='selectors'></div>"
+        ..appendTo $ '#wrap'
+    $partySelectors = $ "<div class='parties'></div>"
+        ..appendTo $selectors
+    $agencySelectors = $ "<div class='agencies'></div>"
+        ..appendTo $selectors
+    for agency, agencyId of agencies_to_ids
+        $pair = $ "<div class='pair'></div>"
+            ..appendTo $agencySelectors
+        $ "<input type='checkbox' value='#agencyId' id='chc-#agencyId' checked='checked'/>"
+            ..appendTo $pair
+        $ "<label for='chc-#agencyId'>#agency</label>"
+            ..appendTo $pair
+
+    for party, partyId of parties_to_ids
+        $pair = $ "<div class='pair'></div>"
+            ..appendTo $partySelectors
+        $ "<input type='checkbox' value='#partyId' id='chc-#partyId' checked='checked'/>"
+            ..appendTo $pair
+        $ "<label for='chc-#partyId'>#party</label>"
+            ..appendTo $pair
+    $ \body .on \change \input ->
+        agencies = graph.display_agencies
+            ..length = 0
+
+        inputs = $agencySelectors .find "input:checked"
+        inputs.each -> agencies.push @value
+
+        parties = graph.display_parties
+            ..length = 0
+        inputs = $partySelectors .find "input:checked"
+        inputs.each -> parties.push @value
+        graph.draw!
 
 class Datapoint
     ([@party, date, percent, @agency])->

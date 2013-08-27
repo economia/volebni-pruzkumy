@@ -27,11 +27,6 @@ window.Graph = class Graph
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @draw!
-        @scale_y
-            ..domain [0 30]
-        <~ setTimeout _, 1200
-        @display_parties  = <[vv spoz sz kscm kdu]>
-        @draw!
 
     draw: ->
         lines = @lines.filter @~lineFilter
