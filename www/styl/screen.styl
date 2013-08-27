@@ -13,6 +13,41 @@ body
                 clear left
             .pair
                 float left
+                input
+                    display none
+                label
+                    display block
+                    margin 3px
+                    padding 4px 6px
+                    cursor pointer
+                    background #eee
+
+                label:hover
+                    opacity 0.7
+
+                input:checked + label
+                    background: HNBlue;
+                    &.cssd
+                        background PartyCSSD
+                    &.vv
+                        background PartyVV
+                    &.spoz
+                        background PartySPOZ
+                    &.ods
+                        background PartyODS
+                        color white
+                    &.top
+                        background PartyTOP
+                        color white
+                    &.sz
+                        background PartySZ
+                        color white
+                    &.kscm
+                        background PartyKSCM
+                        color white
+                    &.kdu
+                        background PartyKDU
+                        color white
 
     svg
         .datapaths

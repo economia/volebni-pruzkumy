@@ -69,7 +69,7 @@
       z4$.appendTo($partySelectors);
       z5$ = $("<input type='checkbox' value='" + partyId + "' id='chc-" + partyId + "' checked='checked'/>");
       z5$.appendTo($pair);
-      z6$ = $("<label for='chc-" + partyId + "'>" + party + "</label>");
+      z6$ = $("<label for='chc-" + partyId + "' class='" + partyId + "'>" + party + "</label>");
       z6$.appendTo($pair);
     }
     return $('body').on('change', 'input', function(){

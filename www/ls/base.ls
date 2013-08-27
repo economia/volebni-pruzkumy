@@ -53,7 +53,7 @@ generateSelectors = ->
             ..appendTo $partySelectors
         $ "<input type='checkbox' value='#partyId' id='chc-#partyId' checked='checked'/>"
             ..appendTo $pair
-        $ "<label for='chc-#partyId'>#party</label>"
+        $ "<label for='chc-#partyId' class='#partyId'>#party</label>"
             ..appendTo $pair
     $ \body .on \change \input ->
         agencies = graph.display_agencies
