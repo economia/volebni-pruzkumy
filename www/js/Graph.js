@@ -51,7 +51,8 @@
       selection = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
       });
-      return this.selectionEnter(selection.enter());
+      this.selectionEnter(selection.enter());
+      return this.selectionExit(selection.exit());
     };
     prototype.selectionEnter = function(selection){
       var x$, this$ = this;
@@ -68,6 +69,16 @@
       return x$;
     };
     prototype.selectionUpdate = function(selection){};
+    prototype.selectionExit = function(selection){
+      var x$, y$;
+      x$ = selection;
+      x$.attr('opacity', 1);
+      y$ = x$.transition();
+      y$.duration(800);
+      y$.attr('opacity', 0);
+      y$.remove();
+      return x$;
+    };
     prototype.lineFilter = function(line){
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
     };

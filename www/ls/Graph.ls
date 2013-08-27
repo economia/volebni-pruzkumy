@@ -37,6 +37,7 @@ window.Graph = class Graph
         selection = @datapaths.selectAll \path
             .data lines, (.id)
         @selectionEnter selection.enter!
+        @selectionExit selection.exit!
 
     selectionEnter: (selection) ->
         selection.append \path
@@ -47,6 +48,13 @@ window.Graph = class Graph
                 line.id
 
     selectionUpdate: (selection) ->
+    selectionExit: (selection) ->
+        selection
+            ..attr \opacity 1
+            ..transition!
+                ..duration 800
+                ..attr \opacity 0
+                ..remove!
 
     lineFilter: (line) ->
         line.agencyId in @display_agencies and line.partyId in @display_parties
