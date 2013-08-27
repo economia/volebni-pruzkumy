@@ -1,6 +1,16 @@
 new Tooltip!watchElements!
 window.datapoints = []
 window.lines = []
+parties_to_ids =
+    "ČSSD" : \cssd
+    "VV" : \vv
+    "SPOZ" : \spoz
+    "ODS" : \ods
+    "TOP09" : \top
+    "SZ" : \sz
+    "KSČM" : \kscm
+    "KDU-ČSL" : \kdu
+
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([party, date, percent, agency]) ->
@@ -26,6 +36,7 @@ class Datapoint
 class Line
     (@id, @party, @agency) ->
         @datapoints = []
+        @partyId = parties_to_ids[@party]
     sortDatapoints: ->
         @datapoints.sort (a, b) ->
             a.date.getTime! - b.date.getTime!

@@ -1,8 +1,18 @@
 (function(){
-  var Datapoint, Line;
+  var parties_to_ids, Datapoint, Line;
   new Tooltip().watchElements();
   window.datapoints = [];
   window.lines = [];
+  parties_to_ids = {
+    "ČSSD": 'cssd',
+    "VV": 'vv',
+    "SPOZ": 'spoz',
+    "ODS": 'ods',
+    "TOP09": 'top',
+    "SZ": 'sz',
+    "KSČM": 'kscm',
+    "KDU-ČSL": 'kdu'
+  };
   window.init = function(data){
     var lines_assoc, datapoints;
     lines_assoc = {};
@@ -49,6 +59,7 @@
       this.party = party;
       this.agency = agency;
       this.datapoints = [];
+      this.partyId = parties_to_ids[this.party];
     }
     prototype.sortDatapoints = function(){
       return this.datapoints.sort(function(a, b){
