@@ -1,5 +1,7 @@
 window.Graph = class Graph
     (@parentSelector, @lines) ->
+        @display_agencies = <[median stem factum cvvm]>
+        @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @width = 630_px
         @height = 600_px
         @margin = [20 0 0 20] # trbl
@@ -28,8 +30,9 @@ window.Graph = class Graph
         @draw!
 
     draw: ->
+        lines = @lines.filter @~lineFilter
         @datapaths.selectAll \path
-            .data @lines, (.id)
+            .data lines, (.id)
             .enter!
                 ..append \path
                     ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
@@ -37,3 +40,5 @@ window.Graph = class Graph
                         @line line.datapoints
                     ..attr \data-tooltip (line) ->
                         line.id
+    lineFilter: (line) ->
+        line.agencyId in @display_agencies and line.partyId in @display_parties

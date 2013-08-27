@@ -7,6 +7,8 @@
       var x$, y$, z$, z1$, z2$, z3$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
+      this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
+      this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
       this.width = 630;
       this.height = 600;
       this.margin = [20, 0, 0, 20];
@@ -40,8 +42,9 @@
       this.draw();
     }
     prototype.draw = function(){
-      var x$, y$, this$ = this;
-      x$ = this.datapaths.selectAll('path').data(this.lines, function(it){
+      var lines, x$, y$, this$ = this;
+      lines = this.lines.filter(bind$(this, 'lineFilter'));
+      x$ = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
       }).enter();
       y$ = x$.append('path');
@@ -56,6 +59,17 @@
       });
       return x$;
     };
+    prototype.lineFilter = function(line){
+      return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
+    };
     return Graph;
   }());
+  function bind$(obj, key, target){
+    return function(){ return (target || obj)[key].apply(obj, arguments) };
+  }
+  function in$(x, arr){
+    var i = -1, l = arr.length >>> 0;
+    while (++i < l) if (x === arr[i] && i in arr) return true;
+    return false;
+  }
 }).call(this);
