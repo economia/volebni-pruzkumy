@@ -3,6 +3,8 @@ window.datapoints = []
 window.lines = []
 window.init = (data) ->
     lines_assoc = {}
+    data.pruzkumy .= filter ([party, date, percent, agency]) ->
+        percent.length > 1
     datapoints = data.pruzkumy.map ([party, date, percent, agency]:datum) ->
         datapoint = new Datapoint datum
         line = lines_assoc[datapoint.lineId]

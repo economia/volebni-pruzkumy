@@ -6,6 +6,11 @@
   window.init = function(data){
     var lines_assoc, datapoints;
     lines_assoc = {};
+    data.pruzkumy = data.pruzkumy.filter(function(arg$){
+      var party, date, percent, agency;
+      party = arg$[0], date = arg$[1], percent = arg$[2], agency = arg$[3];
+      return percent.length > 1;
+    });
     datapoints = data.pruzkumy.map(function(datum){
       var party, date, percent, agency, datapoint, line;
       party = datum[0], date = datum[1], percent = datum[2], agency = datum[3];
