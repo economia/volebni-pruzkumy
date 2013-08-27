@@ -96,6 +96,7 @@
       var x$, y$, this$ = this;
       x$ = selection;
       y$ = x$.transition();
+      y$.delay(500);
       y$.duration(500);
       y$.attr('d', function(line){
         return this$.line(line.datapoints);

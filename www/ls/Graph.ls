@@ -67,6 +67,7 @@ window.Graph = class Graph
     selectionUpdate: (selection) ->
         selection
             ..transition!
+                ..delay 500
                 ..duration 500
                 ..attr \d (line) ~>
                     @line line.datapoints
