@@ -30,7 +30,6 @@
       z1$.domain([this.min_date, this.max_date]);
       z1$.range([0, this.width]);
       z2$ = this.scale_y = d3.scale.linear();
-      z2$.domain([0, 50]);
       z2$.range([this.height, 0]);
       z3$ = this.line = d3.svg.line();
       z3$.x(function(it){
@@ -43,12 +42,17 @@
       z4$ = this.scale_y;
       z4$.domain([0, 30]);
       setTimeout(function(){
+        this$.display_parties = ['vv', 'spoz', 'sz', 'kscm', 'kdu'];
         return this$.draw();
       }, 1200);
     }
     prototype.draw = function(){
-      var lines, selection;
+      var lines, maxValue, selection;
       lines = this.lines.filter(bind$(this, 'lineFilter'));
+      maxValue = Math.max.apply(Math, lines.map(function(it){
+        return it.maxValue;
+      }));
+      this.scale_y.domain([0, maxValue]);
       selection = this.datapaths.selectAll('path').data(lines, function(it){
         return it.id;
       });

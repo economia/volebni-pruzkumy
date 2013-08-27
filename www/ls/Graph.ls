@@ -22,7 +22,6 @@ window.Graph = class Graph
             ..domain [@min_date, @max_date]
             ..range [0 @width]
         @scale_y = d3.scale.linear!
-            ..domain [0 50]
             ..range [@height, 0]
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
@@ -31,10 +30,13 @@ window.Graph = class Graph
         @scale_y
             ..domain [0 30]
         <~ setTimeout _, 1200
+        @display_parties  = <[vv spoz sz kscm kdu]>
         @draw!
 
     draw: ->
         lines = @lines.filter @~lineFilter
+        maxValue = Math.max ...lines.map (.maxValue)
+        @scale_y.domain [0 maxValue]
         selection = @datapaths.selectAll \path
             .data lines, (.id)
         @selectionUpdate selection
