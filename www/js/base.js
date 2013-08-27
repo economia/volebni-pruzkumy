@@ -26,6 +26,8 @@
       var date, percent;
       this.party = arg$[0], date = arg$[1], percent = arg$[2], this.agency = arg$[3];
       this.lineId = this.party + "-" + this.agency;
+      this.date = new Date(date);
+      this.percent = parseFloat(percent);
     }
     return Datapoint;
   }());

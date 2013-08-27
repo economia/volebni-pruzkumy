@@ -15,6 +15,8 @@ window.init = (data) ->
 class Datapoint
     ([@party, date, percent, @agency])->
         @lineId = "#{@party}-#{@agency}"
+        @date = new Date date
+        @percent = parseFloat percent
 
 class Line
     (@id, @party, @agency) ->
