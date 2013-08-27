@@ -2,9 +2,14 @@ window.Graph = class Graph
     (@parentSelector, @lines) ->
         @width = 500_px
         @height = 500_px
+        @margin_top = 20_px
+        @margin_left = 20_px
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height
             ..attr \width  @width
+        @drawing = @svg.append \g
+            ..attr \transform "translate(#{@margin_left}, #{@margin_top})"
+
         @min_date = Math.min ...@lines.map ->
              it.datapoints[0].date.getTime!
         @max_date = Math.max ...@lines.map ->
