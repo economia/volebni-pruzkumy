@@ -7,13 +7,13 @@
       var x$, y$, z$, z1$, z2$, z3$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
-      this.width = 500;
-      this.height = 500;
+      this.width = 630;
+      this.height = 600;
       this.margin_top = 20;
       this.margin_left = 20;
       x$ = this.svg = d3.select(parentSelector).append('svg');
-      x$.attr('height', this.height);
-      x$.attr('width', this.width);
+      x$.attr('height', this.height + this.margin_top);
+      x$.attr('width', this.width + this.margin_left);
       y$ = this.drawing = this.svg.append('g');
       y$.attr('transform', "translate(" + this.margin_left + ", " + this.margin_top + ")");
       y$.attr('class', 'drawing');

@@ -1,12 +1,12 @@
 window.Graph = class Graph
     (@parentSelector, @lines) ->
-        @width = 500_px
-        @height = 500_px
+        @width = 630_px
+        @height = 600_px
         @margin_top = 20_px
         @margin_left = 20_px
         @svg = d3.select parentSelector .append \svg
-            ..attr \height @height
-            ..attr \width  @width
+            ..attr \height @height + @margin_top
+            ..attr \width  @width + @margin_left
         @drawing = @svg.append \g
             ..attr \transform "translate(#{@margin_left}, #{@margin_top})"
             ..attr \class \drawing
