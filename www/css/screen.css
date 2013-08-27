@@ -8,3 +8,8 @@ body a img {
 body #wrap {
   width: 650px;
 }
+body svg .datapaths path {
+  fill: none;
+  stroke: #f00;
+  stroke-width: 2px;
+}
