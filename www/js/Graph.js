@@ -29,7 +29,7 @@
       z1$.domain([this.min_date, this.max_date]);
       z1$.range([0, this.width]);
       z2$ = this.scale_y = d3.scale.linear();
-      z2$.domain([0, 100]);
+      z2$.domain([0, 50]);
       z2$.range([this.height, 0]);
       z3$ = this.line = d3.svg.line();
       z3$.x(function(it){

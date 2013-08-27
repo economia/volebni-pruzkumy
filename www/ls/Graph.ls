@@ -21,7 +21,7 @@ window.Graph = class Graph
             ..domain [@min_date, @max_date]
             ..range [0 @width]
         @scale_y = d3.scale.linear!
-            ..domain [0 100]
+            ..domain [0 50]
             ..range [@height, 0]
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
