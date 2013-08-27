@@ -28,7 +28,7 @@ window.init = (data) ->
             lines.push line
         line.datapoints.push datapoint
         datapoint
-    lines.forEach -> it.sortDatapoints!
+    lines.forEach -> it.processDatapoints!
     window.graph = new Graph '#wrap' lines
 
 class Datapoint
@@ -42,6 +42,10 @@ class Line
         @datapoints = []
         @partyId = parties_to_ids[@party]
         @agencyId = agencies_to_ids[@agency]
+
+    processDatapoints: ->
+        @sortDatapoints!
+        @maxValue = Math.max ...@datapoints.map (.percent)
 
     sortDatapoints: ->
         @datapoints.sort (a, b) ->

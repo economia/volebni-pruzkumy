@@ -41,7 +41,7 @@
       return datapoint;
     });
     lines.forEach(function(it){
-      return it.sortDatapoints();
+      return it.processDatapoints();
     });
     return window.graph = new Graph('#wrap', lines);
   };
@@ -68,6 +68,12 @@
       this.partyId = parties_to_ids[this.party];
       this.agencyId = agencies_to_ids[this.agency];
     }
+    prototype.processDatapoints = function(){
+      this.sortDatapoints();
+      return this.maxValue = Math.max.apply(Math, this.datapoints.map(function(it){
+        return it.percent;
+      }));
+    };
     prototype.sortDatapoints = function(){
       return this.datapoints.sort(function(a, b){
         return a.date.getTime() - b.date.getTime();
