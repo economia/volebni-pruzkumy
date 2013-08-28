@@ -60,6 +60,13 @@ body #wrap .selectors .pair input:checked + label.kdu {
   background: #000;
   color: #fff;
 }
+body svg .axis path {
+  display: none;
+}
+body svg .axis line {
+  stroke: #999;
+  stroke-dasharray: 2, 2;
+}
 body svg .datapaths path {
   fill: none;
   stroke: #f00;

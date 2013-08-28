@@ -4,7 +4,7 @@
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
     function Graph(parentSelector, lines){
-      var x$, y$, z$, z1$, z2$, z3$, this$ = this;
+      var x$, y$, z$, z1$, z2$, z3$, z4$, z5$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
@@ -20,26 +20,31 @@
       y$.attr('class', 'drawing');
       z$ = this.datapaths = this.drawing.append('g');
       z$.attr('class', 'datapaths');
+      z1$ = this.xAxisGroup = this.drawing.append('g');
+      z1$.attr('class', "x axis");
+      z2$ = this.yAxisGroup = this.drawing.append('g');
+      z2$.attr('class', "y axis");
       this.min_date = Math.min.apply(Math, this.lines.map(function(it){
         return it.datapoints[0].date.getTime();
       }));
       this.max_date = Math.max.apply(Math, this.lines.map(function(it){
         return it.datapoints[it.datapoints.length - 1].date.getTime();
       }));
-      z1$ = this.scale_x = d3.scale.linear();
-      z1$.domain([this.min_date, this.max_date]);
-      z1$.range([0, this.width]);
-      z2$ = this.scale_y = d3.scale.linear();
-      z2$.domain([0, 100]);
-      z2$.range([this.height, 0]);
-      z3$ = this.line = d3.svg.line();
-      z3$.x(function(it){
+      z3$ = this.scale_x = d3.scale.linear();
+      z3$.domain([this.min_date, this.max_date]);
+      z3$.range([0, this.width]);
+      z4$ = this.scale_y = d3.scale.linear();
+      z4$.domain([0, 100]);
+      z4$.range([this.height, 0]);
+      z5$ = this.line = d3.svg.line();
+      z5$.x(function(it){
         return this$.scale_x(it.date.getTime());
       });
-      z3$.y(function(it){
+      z5$.y(function(it){
         return this$.scale_y(it.percent);
       });
       this.draw();
+      this.drawAxes();
     }
     prototype.draw = function(){
       var lines, maxValue, ref$, _, lastMaxValue, scaleIsExpanding, selection;
@@ -116,6 +121,14 @@
     };
     prototype.lineFilter = function(line){
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
+    };
+    prototype.drawAxes = function(){
+      var x$, yAxis;
+      x$ = yAxis = d3.svg.axis();
+      x$.scale(this.scale_y);
+      x$.tickSize(this.width);
+      x$.orient('right');
+      return this.yAxisGroup.call(yAxis);
     };
     prototype.setupZoom = function(){
       var x$, y$;

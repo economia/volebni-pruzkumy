@@ -14,6 +14,11 @@ window.Graph = class Graph
         @datapaths = @drawing.append \g
             ..attr \class \datapaths
 
+        @xAxisGroup = @drawing.append \g
+            ..attr \class "x axis"
+        @yAxisGroup = @drawing.append \g
+            ..attr \class "y axis"
+
         @min_date = Math.min ...@lines.map ->
              it.datapoints[0].date.getTime!
         @max_date = Math.max ...@lines.map ->
@@ -28,6 +33,7 @@ window.Graph = class Graph
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @draw!
+        @drawAxes!
 
     draw: ->
         lines = @lines.filter @~lineFilter
@@ -40,7 +46,6 @@ window.Graph = class Graph
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
         @selectionEnter selection.enter!, scaleIsExpanding
-
 
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
@@ -82,6 +87,13 @@ window.Graph = class Graph
 
     lineFilter: (line) ->
         line.agencyId in @display_agencies and line.partyId in @display_parties
+
+    drawAxes: ->
+        yAxis = d3.svg.axis!
+            ..scale @scale_y
+            ..tickSize @width
+            ..orient \right
+        @yAxisGroup.call yAxis
 
     setupZoom: ->
         @zoom = d3.behavior.zoom!
