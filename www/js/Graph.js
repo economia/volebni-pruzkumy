@@ -42,7 +42,6 @@
       z4$.domain([0, 100]);
       z4$.range([this.height, 0]);
       z5$ = this.line = d3.svg.line();
-      z5$.interpolate('monotone');
       z5$.x(function(it){
         return this$.scale_x(it.date.getTime());
       });
