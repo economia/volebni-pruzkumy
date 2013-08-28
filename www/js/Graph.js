@@ -11,7 +11,7 @@
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
       this.width = 630;
       this.height = 600;
-      this.margin = [20, 0, 0, 20];
+      this.margin = [20, 0, 0, 34];
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height + this.margin[0] + this.margin[2]);
       x$.attr('width', this.width + this.margin[1] + this.margin[3]);
@@ -123,12 +123,20 @@
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
     };
     prototype.drawAxes = function(){
-      var x$, yAxis;
+      var x$, yAxis, y$, z$;
       x$ = yAxis = d3.svg.axis();
       x$.scale(this.scale_y);
       x$.tickSize(this.width);
+      x$.tickFormat(function(it){
+        return it + "%";
+      });
       x$.orient('right');
-      return this.yAxisGroup.call(yAxis);
+      y$ = this.yAxisGroup;
+      y$.call(yAxis);
+      z$ = y$.selectAll("text");
+      z$.attr('x', -30);
+      z$.attr('dy', 5);
+      return y$;
     };
     prototype.setupZoom = function(){
       var x$, y$;

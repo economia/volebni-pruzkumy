@@ -4,7 +4,7 @@ window.Graph = class Graph
         @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @width = 630_px
         @height = 600_px
-        @margin = [20 0 0 20] # trbl
+        @margin = [20 0 0 34] # trbl
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height + @margin.0 + @margin.2
             ..attr \width  @width + @margin.1 + @margin.3
@@ -92,8 +92,14 @@ window.Graph = class Graph
         yAxis = d3.svg.axis!
             ..scale @scale_y
             ..tickSize @width
+            ..tickFormat -> "#it%"
             ..orient \right
-        @yAxisGroup.call yAxis
+        @yAxisGroup
+            ..call yAxis
+            ..selectAll "text"
+                ..attr \x -30
+                ..attr \dy 5
+
 
     setupZoom: ->
         @zoom = d3.behavior.zoom!
