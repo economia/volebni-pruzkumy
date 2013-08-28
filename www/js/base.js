@@ -104,6 +104,12 @@
         this.checked = true;
         agencies.push(this.value);
       } else {
+        if ($inputs.length === 0) {
+          $inputs = $agencySelectors.find("input");
+          $inputs.each(function(){
+            return this.checked = true;
+          });
+        }
         $inputs.each(function(){
           return agencies.push(this.value);
         });
@@ -117,6 +123,12 @@
         this.checked = true;
         parties.push(this.value);
       } else {
+        if ($inputs.length === 0) {
+          $inputs = $partySelectors.find("input");
+          $inputs.each(function(){
+            return this.checked = true;
+          });
+        }
         $inputs.each(function(){
           return parties.push(this.value);
         });

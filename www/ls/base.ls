@@ -70,6 +70,9 @@ generateSelectors = ->
             @checked = yes # jQ doesn't work here for some reason
             agencies.push @value
         else
+            if $inputs.length == 0
+                $inputs = $agencySelectors .find "input"
+                $inputs.each -> @checked=yes
             $inputs.each -> agencies.push @value
 
         parties = graph.display_parties
@@ -81,6 +84,9 @@ generateSelectors = ->
             @checked = yes
             parties.push @value
         else
+            if $inputs.length == 0
+                $inputs = $partySelectors .find "input"
+                $inputs.each -> @checked=yes
             $inputs.each -> parties.push @value
         graph.redraw!
 
