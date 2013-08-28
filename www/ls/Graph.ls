@@ -124,7 +124,7 @@ window.Graph = class Graph
             ..outerTickSize 0
             ..orient \bottom
         @xAxisGroup
-            ..attr \transform "translate(0, #{@height + @margin.0})"
+            ..attr \transform "translate(0, #{@height})"
             ..call xAxis
             ..selectAll \text
                 ..attr \dy 9

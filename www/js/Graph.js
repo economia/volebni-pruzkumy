@@ -163,7 +163,7 @@
       x$.outerTickSize(0);
       x$.orient('bottom');
       y$ = this.xAxisGroup;
-      y$.attr('transform', "translate(0, " + (this.height + this.margin[0]) + ")");
+      y$.attr('transform', "translate(0, " + this.height + ")");
       y$.call(xAxis);
       z$ = y$.selectAll('text');
       z$.attr('dy', 9);
