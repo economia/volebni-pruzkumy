@@ -1,12 +1,12 @@
 monthsHuman = <[led únr břz dub kvt čvn čvc srp zář říj lst prs]>
 window.Graph = class Graph
-    (@parentSelector, @lines) ->
+    (@parentSelector, @lines, {width=970_px, height=600_px}={}) ->
         @currentLines = @lines
         @display_agencies = <[median stem factum cvvm]>
         @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @margin = [0 10 50 34] # trbl
-        @width = 970_px - @margin.1 - @margin.3
-        @height = 600_px - @margin.0 - @margin.2
+        @width = width - @margin.1 - @margin.3
+        @height = height - @margin.0 - @margin.2
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height + @margin.0 + @margin.2
             ..attr \width  @width + @margin.1 + @margin.3

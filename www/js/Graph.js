@@ -4,16 +4,19 @@
   window.Graph = Graph = (function(){
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
-    function Graph(parentSelector, lines){
-      var x$, y$, z$, z1$, z2$, min_date, max_date, z3$, z4$, z5$, this$ = this;
+    function Graph(parentSelector, lines, arg$){
+      var ref$, width, ref1$, height, x$, y$, z$, z1$, z2$, min_date, max_date, z3$, z4$, z5$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
+      ref$ = arg$ != null
+        ? arg$
+        : {}, width = (ref1$ = ref$.width) != null ? ref1$ : 970, height = (ref1$ = ref$.height) != null ? ref1$ : 600;
       this.currentLines = this.lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
       this.margin = [0, 10, 50, 34];
-      this.width = 970 - this.margin[1] - this.margin[3];
-      this.height = 600 - this.margin[0] - this.margin[2];
+      this.width = width - this.margin[1] - this.margin[3];
+      this.height = height - this.margin[0] - this.margin[2];
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height + this.margin[0] + this.margin[2]);
       x$.attr('width', this.width + this.margin[1] + this.margin[3]);
