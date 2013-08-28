@@ -103,7 +103,7 @@ window.Graph = class Graph
     selectionExit: (selection) ->
         selection
             ..attr \opacity 1
-            ..attr \class (line) -> "#{line.partyId} #{line.agencyId}"
+            ..classed \active no
             ..transition!
                 ..duration 800
                 ..attr \opacity 0

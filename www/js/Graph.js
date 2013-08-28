@@ -140,9 +140,7 @@
       var x$, y$;
       x$ = selection;
       x$.attr('opacity', 1);
-      x$.attr('class', function(line){
-        return line.partyId + " " + line.agencyId;
-      });
+      x$.classed('active', false);
       y$ = x$.transition();
       y$.duration(800);
       y$.attr('opacity', 0);
