@@ -61,7 +61,8 @@ body #wrap .selectors .pair input:checked + label.kdu {
   color: #fff;
 }
 body svg .axis path {
-  display: none;
+  stroke: #333;
+  stroke-width: 1px;
 }
 body svg .axis line {
   stroke: #999;

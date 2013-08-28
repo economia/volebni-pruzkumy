@@ -127,6 +127,7 @@
       x$ = yAxis = d3.svg.axis();
       x$.scale(this.scale_y);
       x$.tickSize(this.width);
+      x$.outerTickSize(0);
       x$.tickFormat(function(it){
         if (it && 0 === it % 10) {
           return it + "%";
