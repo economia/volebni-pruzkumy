@@ -123,7 +123,7 @@
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
     };
     prototype.drawAxes = function(){
-      var x$, yAxis, y$, z$;
+      var x$, yAxis, y$, z$, z1$, z2$;
       x$ = yAxis = d3.svg.axis();
       x$.scale(this.scale_y);
       x$.tickSize(this.width);
@@ -141,6 +141,11 @@
       z$ = y$.selectAll("text");
       z$.attr('x', -30);
       z$.attr('dy', 5);
+      z1$ = y$.selectAll("line");
+      z2$ = z1$.filter(function(it){
+        return it % 10;
+      });
+      z2$.classed('minor', true);
       return y$;
     };
     prototype.setupZoom = function(){

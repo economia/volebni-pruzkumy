@@ -66,7 +66,11 @@ body svg .axis path {
 }
 body svg .axis line {
   stroke: #999;
+  stroke-width: 1px;
   stroke-dasharray: 2, 2;
+}
+body svg .axis line.minor {
+  stroke-dasharray: 2, 15;
 }
 body svg .axis text {
   font-size: 0.8em;

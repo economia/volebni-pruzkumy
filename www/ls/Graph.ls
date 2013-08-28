@@ -100,6 +100,9 @@ window.Graph = class Graph
             ..selectAll "text"
                 ..attr \x -30
                 ..attr \dy 5
+            ..selectAll "line"
+                ..filter( -> it % 10)
+                    ..classed \minor yes
 
     setupZoom: ->
         @zoom = d3.behavior.zoom!
