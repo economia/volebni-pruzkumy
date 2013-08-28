@@ -64,7 +64,7 @@
     });
   };
   generateSelectors = function(){
-    var x$, $selectors, y$, $partySelectors, z$, $agencySelectors, agency, ref$, ref1$, id, text, z1$, $pair, z2$, z3$, z4$, party, partyId, z5$, z6$, z7$;
+    var x$, $selectors, y$, $partySelectors, z$, $agencySelectors, agency, ref$, ref1$, id, text, z1$, $pair, z2$, z3$, z4$, party, partyId, z5$, z6$, z7$, partySelected, agencySelected;
     x$ = $selectors = $("<div class='selectors'></div>");
     x$.appendTo($('#wrap'));
     y$ = $partySelectors = $("<div class='parties'></div>");
@@ -75,7 +75,7 @@
       ref1$ = ref$[agency], id = ref1$.id, text = ref1$.text;
       z1$ = $pair = $("<div class='pair'></div>");
       z1$.appendTo($agencySelectors);
-      z2$ = $("<input type='checkbox' value='" + id + "' id='chc-" + id + "' checked='checked'/>");
+      z2$ = $("<input type='checkbox' class='agency' value='" + id + "' id='chc-" + id + "' checked='checked'/>");
       z2$.appendTo($pair);
       z3$ = $("<label for='chc-" + id + "'>" + agency + "</label>");
       z3$.appendTo($pair);
@@ -86,25 +86,41 @@
       partyId = ref$[party];
       z5$ = $pair = $("<div class='pair'></div>");
       z5$.appendTo($partySelectors);
-      z6$ = $("<input type='checkbox' value='" + partyId + "' id='chc-" + partyId + "' checked='checked'/>");
+      z6$ = $("<input type='checkbox' class='party' value='" + partyId + "' id='chc-" + partyId + "' checked='checked'/>");
       z6$.appendTo($pair);
       z7$ = $("<label for='chc-" + partyId + "' class='" + partyId + "'>" + party + "</label>");
       z7$.appendTo($pair);
     }
-    return $('body').on('change', 'input', function(){
-      var x$, agencies, inputs, y$, parties;
+    partySelected = agencySelected = false;
+    return $('body').on('change', 'input', function(evt){
+      var $ele, x$, agencies, $inputs, y$, parties;
+      $ele = $(this);
       x$ = agencies = graph.display_agencies;
       x$.length = 0;
-      inputs = $agencySelectors.find("input:checked");
-      inputs.each(function(){
-        return agencies.push(this.value);
-      });
+      $inputs = $agencySelectors.find("input:checked");
+      if ($ele.hasClass('agency') && !agencySelected) {
+        agencySelected = true;
+        $inputs.attr('checked', false);
+        this.checked = true;
+        agencies.push(this.value);
+      } else {
+        $inputs.each(function(){
+          return agencies.push(this.value);
+        });
+      }
       y$ = parties = graph.display_parties;
       y$.length = 0;
-      inputs = $partySelectors.find("input:checked");
-      inputs.each(function(){
-        return parties.push(this.value);
-      });
+      $inputs = $partySelectors.find("input:checked");
+      if ($ele.hasClass('party') && !partySelected) {
+        partySelected = true;
+        $inputs.attr('checked', false);
+        this.checked = true;
+        parties.push(this.value);
+      } else {
+        $inputs.each(function(){
+          return parties.push(this.value);
+        });
+      }
       return graph.redraw();
     });
   };
