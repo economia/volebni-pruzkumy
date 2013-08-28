@@ -128,7 +128,11 @@
       x$.scale(this.scale_y);
       x$.tickSize(this.width);
       x$.tickFormat(function(it){
-        return it + "%";
+        if (it) {
+          return it + "%";
+        } else {
+          return "";
+        }
       });
       x$.orient('right');
       y$ = this.yAxisGroup;

@@ -92,14 +92,13 @@ window.Graph = class Graph
         yAxis = d3.svg.axis!
             ..scale @scale_y
             ..tickSize @width
-            ..tickFormat -> "#it%"
+            ..tickFormat -> if it then "#it%" else ""
             ..orient \right
         @yAxisGroup
             ..call yAxis
             ..selectAll "text"
                 ..attr \x -30
                 ..attr \dy 5
-
 
     setupZoom: ->
         @zoom = d3.behavior.zoom!

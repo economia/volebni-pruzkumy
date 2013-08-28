@@ -70,6 +70,9 @@ body svg .axis line {
 body svg .axis text {
   font-size: 0.8em;
 }
+body svg .axis .zeroline text {
+  display: none;
+}
 body svg .datapaths path {
   fill: none;
   stroke: #f00;
