@@ -73,6 +73,7 @@ generateSelectors = ->
             if $inputs.length == 0
                 $inputs = $agencySelectors .find "input"
                 $inputs.each -> @checked=yes
+                agencySelected := no
             $inputs.each -> agencies.push @value
 
         parties = graph.display_parties
@@ -87,6 +88,7 @@ generateSelectors = ->
             if $inputs.length == 0
                 $inputs = $partySelectors .find "input"
                 $inputs.each -> @checked=yes
+                partySelected := no
             $inputs.each -> parties.push @value
         graph.redraw!
 

@@ -109,6 +109,7 @@
           $inputs.each(function(){
             return this.checked = true;
           });
+          agencySelected = false;
         }
         $inputs.each(function(){
           return agencies.push(this.value);
@@ -128,6 +129,7 @@
           $inputs.each(function(){
             return this.checked = true;
           });
+          partySelected = false;
         }
         $inputs.each(function(){
           return parties.push(this.value);
