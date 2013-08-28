@@ -14,10 +14,22 @@
     "KDU-ČSL": 'kdu'
   };
   agencies_to_ids = {
-    "Median": 'median',
-    "STEM": 'stem',
-    "Factum": 'factum',
-    "CVVM": 'cvvm'
+    "Median": {
+      id: 'median',
+      text: "Recusandae, quisquam cumque aliquid!"
+    },
+    "STEM": {
+      id: 'stem',
+      text: "Quia, soluta accusantium vero!"
+    },
+    "Factum": {
+      id: 'factum',
+      text: "Suscipit, unde tenetur optio!"
+    },
+    "CVVM": {
+      id: 'cvvm',
+      text: "Ea, corrupti pariatur animi."
+    }
   };
   window.init = function(data){
     var lines_assoc, datapoints, width, height;
@@ -52,7 +64,7 @@
     });
   };
   generateSelectors = function(){
-    var x$, $selectors, y$, $partySelectors, z$, $agencySelectors, agency, ref$, agencyId, z1$, $pair, z2$, z3$, party, partyId, z4$, z5$, z6$;
+    var x$, $selectors, y$, $partySelectors, z$, $agencySelectors, agency, ref$, ref1$, id, text, z1$, $pair, z2$, z3$, z4$, party, partyId, z5$, z6$, z7$;
     x$ = $selectors = $("<div class='selectors'></div>");
     x$.appendTo($('#wrap'));
     y$ = $partySelectors = $("<div class='parties'></div>");
@@ -60,22 +72,24 @@
     z$ = $agencySelectors = $("<div class='agencies'></div>");
     z$.appendTo($selectors);
     for (agency in ref$ = agencies_to_ids) {
-      agencyId = ref$[agency];
+      ref1$ = ref$[agency], id = ref1$.id, text = ref1$.text;
       z1$ = $pair = $("<div class='pair'></div>");
       z1$.appendTo($agencySelectors);
-      z2$ = $("<input type='checkbox' value='" + agencyId + "' id='chc-" + agencyId + "' checked='checked'/>");
+      z2$ = $("<input type='checkbox' value='" + id + "' id='chc-" + id + "' checked='checked'/>");
       z2$.appendTo($pair);
-      z3$ = $("<label for='chc-" + agencyId + "'>" + agency + "</label>");
+      z3$ = $("<label for='chc-" + id + "'>" + agency + "</label>");
       z3$.appendTo($pair);
+      z4$ = $("<span class='description'>" + text + "</span>");
+      z4$.appendTo($pair);
     }
     for (party in ref$ = parties_to_ids) {
       partyId = ref$[party];
-      z4$ = $pair = $("<div class='pair'></div>");
-      z4$.appendTo($partySelectors);
-      z5$ = $("<input type='checkbox' value='" + partyId + "' id='chc-" + partyId + "' checked='checked'/>");
-      z5$.appendTo($pair);
-      z6$ = $("<label for='chc-" + partyId + "' class='" + partyId + "'>" + party + "</label>");
+      z5$ = $pair = $("<div class='pair'></div>");
+      z5$.appendTo($partySelectors);
+      z6$ = $("<input type='checkbox' value='" + partyId + "' id='chc-" + partyId + "' checked='checked'/>");
       z6$.appendTo($pair);
+      z7$ = $("<label for='chc-" + partyId + "' class='" + partyId + "'>" + party + "</label>");
+      z7$.appendTo($pair);
     }
     return $('body').on('change', 'input', function(){
       var x$, agencies, inputs, y$, parties;
@@ -115,7 +129,7 @@
       this.agency = agency;
       this.datapoints = [];
       this.partyId = parties_to_ids[this.party];
-      this.agencyId = agencies_to_ids[this.agency];
+      this.agencyId = agencies_to_ids[this.agency].id;
     }
     prototype.processDatapoints = function(){
       this.sortDatapoints();

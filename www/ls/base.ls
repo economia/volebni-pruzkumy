@@ -11,10 +11,10 @@ parties_to_ids =
     "KSČM" : \kscm
     "KDU-ČSL" : \kdu
 agencies_to_ids =
-    "Median": \median
-    "STEM": \stem
-    "Factum": \factum
-    "CVVM": \cvvm
+    "Median": id: \median text: "Recusandae, quisquam cumque aliquid!"
+    "STEM":   id: \stem   text: "Quia, soluta accusantium vero!"
+    "Factum": id: \factum text: "Suscipit, unde tenetur optio!"
+    "CVVM":   id: \cvvm   text: "Ea, corrupti pariatur animi."
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([party, date, percent, agency]) ->
@@ -41,12 +41,14 @@ generateSelectors = ->
         ..appendTo $selectors
     $agencySelectors = $ "<div class='agencies'></div>"
         ..appendTo $selectors
-    for agency, agencyId of agencies_to_ids
+    for agency, {id, text} of agencies_to_ids
         $pair = $ "<div class='pair'></div>"
             ..appendTo $agencySelectors
-        $ "<input type='checkbox' value='#agencyId' id='chc-#agencyId' checked='checked'/>"
+        $ "<input type='checkbox' value='#id' id='chc-#id' checked='checked'/>"
             ..appendTo $pair
-        $ "<label for='chc-#agencyId'>#agency</label>"
+        $ "<label for='chc-#id'>#agency</label>"
+            ..appendTo $pair
+        $ "<span class='description'>#text</span>"
             ..appendTo $pair
 
     for party, partyId of parties_to_ids
@@ -79,7 +81,7 @@ class Line
     (@id, @party, @agency) ->
         @datapoints = []
         @partyId = parties_to_ids[@party]
-        @agencyId = agencies_to_ids[@agency]
+        @agencyId = agencies_to_ids[@agency].id
 
     processDatapoints: ->
         @sortDatapoints!

@@ -29,7 +29,7 @@ body #wrap .selectors > div.parties label {
   text-align: center;
 }
 body #wrap .selectors > div.agencies {
-  width: 300px;
+  width: 350px;
   right: 0px;
 }
 body #wrap .selectors > div.agencies .pair {
@@ -37,8 +37,17 @@ body #wrap .selectors > div.agencies .pair {
   clear: both;
 }
 body #wrap .selectors > div.agencies .pair label {
-  width: 70px;
+  float: right;
+  width: 65px;
   text-align: center;
+}
+body #wrap .selectors > div.agencies .pair .description {
+  font-size: 0.9em;
+  margin-top: 8px;
+  margin-right: 5px;
+  width: 260px;
+  text-align: right;
+  float: right;
 }
 body #wrap .selectors > div .pair {
   float: left;
