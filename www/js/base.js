@@ -20,7 +20,7 @@
     "CVVM": 'cvvm'
   };
   window.init = function(data){
-    var lines_assoc, datapoints;
+    var lines_assoc, datapoints, width, height;
     lines_assoc = {};
     data.pruzkumy = data.pruzkumy.filter(function(arg$){
       var party, date, percent, agency;
@@ -44,7 +44,12 @@
       return it.processDatapoints();
     });
     generateSelectors();
-    return window.graph = new Graph('#wrap', lines);
+    width = $(window).width();
+    height = $(window).height();
+    return window.graph = new Graph('#wrap', lines, {
+      width: width,
+      height: height
+    });
   };
   generateSelectors = function(){
     var x$, $selectors, y$, $partySelectors, z$, $agencySelectors, agency, ref$, agencyId, z1$, $pair, z2$, z3$, party, partyId, z4$, z5$, z6$;

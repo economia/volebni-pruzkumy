@@ -30,8 +30,9 @@ window.init = (data) ->
         datapoint
     lines.forEach -> it.processDatapoints!
     generateSelectors!
-
-    window.graph = new Graph '#wrap' lines
+    width = $ window .width!
+    height = $ window .height!
+    window.graph = new Graph '#wrap' lines, {width, height}
 
 generateSelectors = ->
     $selectors = $ "<div class='selectors'></div>"

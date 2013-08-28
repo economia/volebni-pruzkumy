@@ -14,7 +14,7 @@
       this.currentLines = this.lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
-      this.margin = [0, 10, 50, 34];
+      this.margin = [80, 10, 50, 34];
       this.width = width - this.margin[1] - this.margin[3];
       this.height = height - this.margin[0] - this.margin[2];
       x$ = this.svg = d3.select(parentSelector).append('svg');
