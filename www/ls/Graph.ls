@@ -35,9 +35,11 @@ window.Graph = class Graph
             ..interpolate \monotone
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
+        @datapointSymbol = d3.svg.symbol!
         @recomputeScales!
         @drawGhost!
         @drawContentLines!
+        @drawDatapointSymbols!
         @drawAxes!
 
     drawGhost: ->
@@ -55,14 +57,26 @@ window.Graph = class Graph
         currentMaxValue = @scale_y.domain!.1
         scaleIsExpanding = lastMaxValue and lastMaxValue < currentMaxValue
         @drawContentLines scaleIsExpanding
+        @drawDatapointSymbols scaleIsExpanding
 
     drawContentLines: (scaleIsExpanding)->
-        selection = @datapaths.selectAll \path.notHiding
+        selection = @datapaths.selectAll \path.line.notHiding
             .data @currentLines, (.id)
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
         @selectionEnter selection.enter!, scaleIsExpanding
         @rescaleOtherElements scaleIsExpanding
+
+    drawDatapointSymbols: ->
+        selection = @datapaths.selectAll \g.symbol.notHiding
+            .data @currentLines, (.id)
+        selection.enter!.append \g
+            .attr \class "symbol notHiding"
+            .selectAll 'path'
+            .data (.datapoints)
+            .enter!append \path
+                ..attr \d @datapointSymbol
+                ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
 
     rescaleOtherElements: (scaleIsExpanding)->
         @rescaleAxes scaleIsExpanding
@@ -75,7 +89,7 @@ window.Graph = class Graph
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
         path = selection.append \path
-            ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active notHiding"
+            ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active line notHiding"
             ..attr \d (line) ~>
                 @line line.datapoints
             ..attr \data-tooltip (line) ->

@@ -49,9 +49,11 @@
       z5$.y(function(it){
         return this$.scale_y(it.percent);
       });
+      this.datapointSymbol = d3.svg.symbol();
       this.recomputeScales();
       this.drawGhost();
       this.drawContentLines();
+      this.drawDatapointSymbols();
       this.drawAxes();
     }
     prototype.drawGhost = function(){
@@ -70,17 +72,32 @@
       this.recomputeScales();
       currentMaxValue = this.scale_y.domain()[1];
       scaleIsExpanding = lastMaxValue && lastMaxValue < currentMaxValue;
-      return this.drawContentLines(scaleIsExpanding);
+      this.drawContentLines(scaleIsExpanding);
+      return this.drawDatapointSymbols(scaleIsExpanding);
     };
     prototype.drawContentLines = function(scaleIsExpanding){
       var selection;
-      selection = this.datapaths.selectAll('path.notHiding').data(this.currentLines, function(it){
+      selection = this.datapaths.selectAll('path.line.notHiding').data(this.currentLines, function(it){
         return it.id;
       });
       this.selectionUpdate(selection, scaleIsExpanding);
       this.selectionExit(selection.exit());
       this.selectionEnter(selection.enter(), scaleIsExpanding);
       return this.rescaleOtherElements(scaleIsExpanding);
+    };
+    prototype.drawDatapointSymbols = function(){
+      var selection, x$, this$ = this;
+      selection = this.datapaths.selectAll('g.symbol.notHiding').data(this.currentLines, function(it){
+        return it.id;
+      });
+      x$ = selection.enter().append('g').attr('class', "symbol notHiding").selectAll('path').data(function(it){
+        return it.datapoints;
+      }).enter().append('path');
+      x$.attr('d', this.datapointSymbol);
+      x$.attr('transform', function(pt){
+        return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
+      });
+      return x$;
     };
     prototype.rescaleOtherElements = function(scaleIsExpanding){
       this.rescaleAxes(scaleIsExpanding);
@@ -98,7 +115,7 @@
       maxLen = 0;
       x$ = path = selection.append('path');
       x$.attr('class', function(line){
-        return line.partyId + " " + line.agencyId + " active notHiding";
+        return line.partyId + " " + line.agencyId + " active line notHiding";
       });
       x$.attr('d', function(line){
         return this$.line(line.datapoints);
