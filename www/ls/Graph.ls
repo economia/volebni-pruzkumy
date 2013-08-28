@@ -67,7 +67,8 @@ window.Graph = class Graph
         @selectionEnter selection.enter!, scaleIsExpanding
         @rescaleOtherElements scaleIsExpanding
 
-    drawDatapointSymbols: ->
+    drawDatapointSymbols: (scaleIsExpanding) ->
+        baseDelay = if scaleIsExpanding then 400 else 0
         selection = @datapaths.selectAll \g.symbol.notHiding
             .data @currentLines, (.id)
         selection.enter!.append \g
@@ -78,6 +79,12 @@ window.Graph = class Graph
             .enter!append \path
                 ..attr \d @datapointSymbol
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
+                ..attr \opacity 0
+                ..transition!
+                    ..attr \opacity 1
+                    ..duration 400
+                    ..delay (pt, index) -> baseDelay + index * 20
+
         selection.exit!
             ..transition!
                 ..attr \opacity 0

@@ -85,8 +85,9 @@
       this.selectionEnter(selection.enter(), scaleIsExpanding);
       return this.rescaleOtherElements(scaleIsExpanding);
     };
-    prototype.drawDatapointSymbols = function(){
-      var selection, x$, y$, z$, this$ = this;
+    prototype.drawDatapointSymbols = function(scaleIsExpanding){
+      var baseDelay, selection, x$, y$, z$, z1$, this$ = this;
+      baseDelay = scaleIsExpanding ? 400 : 0;
       selection = this.datapaths.selectAll('g.symbol.notHiding').data(this.currentLines, function(it){
         return it.id;
       });
@@ -97,12 +98,19 @@
       x$.attr('transform', function(pt){
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
-      y$ = selection.exit();
-      z$ = y$.transition();
-      z$.attr('opacity', 0);
-      z$.duration(800);
-      z$.remove();
-      return y$;
+      x$.attr('opacity', 0);
+      y$ = x$.transition();
+      y$.attr('opacity', 1);
+      y$.duration(400);
+      y$.delay(function(pt, index){
+        return baseDelay + index * 20;
+      });
+      z$ = selection.exit();
+      z1$ = z$.transition();
+      z1$.attr('opacity', 0);
+      z1$.duration(800);
+      z1$.remove();
+      return z$;
     };
     prototype.rescaleOtherElements = function(scaleIsExpanding){
       this.rescaleAxes(scaleIsExpanding);
