@@ -113,5 +113,5 @@ body svg .datapaths path:hover {
 }
 body svg .datapaths path.ghost {
   stroke-width: 1px;
-  stroke: #666;
+  stroke: #ddd;
 }
