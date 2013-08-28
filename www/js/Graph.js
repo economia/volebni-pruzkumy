@@ -10,9 +10,9 @@
       this.lines = lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
-      this.width = 630;
-      this.height = 600;
       this.margin = [0, 10, 50, 34];
+      this.width = 970 - this.margin[1] - this.margin[3];
+      this.height = 600 - this.margin[0] - this.margin[2];
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height + this.margin[0] + this.margin[2]);
       x$.attr('width', this.width + this.margin[1] + this.margin[3]);
