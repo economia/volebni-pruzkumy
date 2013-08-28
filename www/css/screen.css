@@ -75,6 +75,10 @@ body svg .axis line.minor {
 body svg .axis text {
   font-size: 0.8em;
 }
+body svg .axis.x line {
+  stroke-dasharray: 1, 0;
+  stroke: #333;
+}
 body svg .datapaths path {
   fill: none;
   stroke: #f00;

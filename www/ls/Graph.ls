@@ -105,7 +105,7 @@ window.Graph = class Graph
             ..ticks d3.time.months
             ..tickFormat ->
                 monthsHuman[it.getMonth!]
-            ..tickSize 5
+            ..tickSize 3
             ..outerTickSize 0
             ..orient \bottom
         @xAxisGroup
@@ -114,8 +114,8 @@ window.Graph = class Graph
             ..selectAll \text
                 ..attr \dy ->
                     switch
-                    | it.getMonth! % 2 => 19
-                    | otherwise        => 7
+                    | it.getMonth! % 2 => 21
+                    | otherwise        => 9
 
     drawYAxis: ->
         yAxis = d3.svg.axis!

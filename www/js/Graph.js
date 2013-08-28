@@ -143,7 +143,7 @@
       x$.tickFormat(function(it){
         return monthsHuman[it.getMonth()];
       });
-      x$.tickSize(5);
+      x$.tickSize(3);
       x$.outerTickSize(0);
       x$.orient('bottom');
       y$ = this.xAxisGroup;
@@ -153,9 +153,9 @@
       z$.attr('dy', function(it){
         switch (false) {
         case !(it.getMonth() % 2):
-          return 19;
+          return 21;
         default:
-          return 7;
+          return 9;
         }
       });
       return y$;
