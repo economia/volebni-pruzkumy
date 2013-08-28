@@ -32,6 +32,7 @@ window.Graph = class Graph
             ..domain [0 100]
             ..range [@height, 0]
         @line = d3.svg.line!
+            ..interpolate \monotone
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @recomputeScales!
