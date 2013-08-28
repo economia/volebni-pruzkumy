@@ -56,7 +56,7 @@ window.Graph = class Graph
         @draw scaleIsExpanding
 
     draw: (scaleIsExpanding)->
-        selection = @datapaths.selectAll \path.active
+        selection = @datapaths.selectAll \path.notHiding
             .data @currentLines, (.id)
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
@@ -74,7 +74,7 @@ window.Graph = class Graph
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
         path = selection.append \path
-            ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active"
+            ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active notHiding"
             ..attr \d (line) ~>
                 @line line.datapoints
             ..attr \data-tooltip (line) ->
@@ -103,7 +103,7 @@ window.Graph = class Graph
     selectionExit: (selection) ->
         selection
             ..attr \opacity 1
-            ..classed \active no
+            ..classed \notHiding no
             ..transition!
                 ..duration 800
                 ..attr \opacity 0

@@ -73,7 +73,7 @@
     };
     prototype.draw = function(scaleIsExpanding){
       var selection;
-      selection = this.datapaths.selectAll('path.active').data(this.currentLines, function(it){
+      selection = this.datapaths.selectAll('path.notHiding').data(this.currentLines, function(it){
         return it.id;
       });
       this.selectionUpdate(selection, scaleIsExpanding);
@@ -97,7 +97,7 @@
       maxLen = 0;
       x$ = path = selection.append('path');
       x$.attr('class', function(line){
-        return line.partyId + " " + line.agencyId + " active";
+        return line.partyId + " " + line.agencyId + " active notHiding";
       });
       x$.attr('d', function(line){
         return this$.line(line.datapoints);
@@ -140,7 +140,7 @@
       var x$, y$;
       x$ = selection;
       x$.attr('opacity', 1);
-      x$.classed('active', false);
+      x$.classed('notHiding', false);
       y$ = x$.transition();
       y$.duration(800);
       y$.attr('opacity', 0);
