@@ -40,7 +40,7 @@ window.Graph = class Graph
         @drawAxes!
 
     drawGhost: ->
-        @datapaths.selectAll "path.ghost"
+        @ghostLines = @datapaths.selectAll "path.ghost"
             .data @lines
             .enter!
             .append \path
@@ -61,11 +61,11 @@ window.Graph = class Graph
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
         @selectionEnter selection.enter!, scaleIsExpanding
-        tickTransition = @yAxisGroup.selectAll ".tick" .transition!
-            ..duration 500
-            ..attr \transform ~>"translate(0, #{@scale_y it})"
-        if not scaleIsExpanding
-            tickTransition.delay 400
+        @rescaleOtherElements scaleIsExpanding
+
+    rescaleOtherElements: (scaleIsExpanding)->
+        @rescaleAxes scaleIsExpanding
+        @rescaleGhosts scaleIsExpanding
 
     recomputeScales: ->
         maxValue = Math.max ...@currentLines.map (.maxValue)
@@ -144,7 +144,20 @@ window.Graph = class Graph
             ..selectAll "line"
                 ..filter( -> it % 10)
                     ..classed \minor yes
+    rescaleGhosts: (scaleIsExpanding) ->
+        transition = @ghostLines.transition!
+            ..duration 500
+            ..attr \d (line) ~> @line line.datapoints
+        if !scaleIsExpanding
+            transition.delay 500
 
+
+    rescaleAxes: (scaleIsExpanding) ->
+        tickTransition = @yAxisGroup.selectAll ".tick" .transition!
+            ..duration 500
+            ..attr \transform ~>"translate(0, #{@scale_y it})"
+        if not scaleIsExpanding
+            tickTransition.delay 400
     setupZoom: ->
         @zoom = d3.behavior.zoom!
             ..x @scale_x

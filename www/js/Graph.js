@@ -52,7 +52,7 @@
     }
     prototype.drawGhost = function(){
       var x$, this$ = this;
-      x$ = this.datapaths.selectAll("path.ghost").data(this.lines).enter().append('path');
+      x$ = this.ghostLines = this.datapaths.selectAll("path.ghost").data(this.lines).enter().append('path');
       x$.attr('class', 'ghost');
       x$.attr('d', function(line){
         return this$.line(line.datapoints);
@@ -69,21 +69,18 @@
       return this.draw(scaleIsExpanding);
     };
     prototype.draw = function(scaleIsExpanding){
-      var selection, x$, tickTransition, this$ = this;
+      var selection;
       selection = this.datapaths.selectAll('path.active').data(this.currentLines, function(it){
         return it.id;
       });
       this.selectionUpdate(selection, scaleIsExpanding);
       this.selectionExit(selection.exit());
       this.selectionEnter(selection.enter(), scaleIsExpanding);
-      x$ = tickTransition = this.yAxisGroup.selectAll(".tick").transition();
-      x$.duration(500);
-      x$.attr('transform', function(it){
-        return "translate(0, " + this$.scale_y(it) + ")";
-      });
-      if (!scaleIsExpanding) {
-        return tickTransition.delay(400);
-      }
+      return this.rescaleOtherElements(scaleIsExpanding);
+    };
+    prototype.rescaleOtherElements = function(scaleIsExpanding){
+      this.rescaleAxes(scaleIsExpanding);
+      return this.rescaleGhosts(scaleIsExpanding);
     };
     prototype.recomputeScales = function(){
       var maxValue;
@@ -196,6 +193,28 @@
       });
       z2$.classed('minor', true);
       return y$;
+    };
+    prototype.rescaleGhosts = function(scaleIsExpanding){
+      var x$, transition, this$ = this;
+      x$ = transition = this.ghostLines.transition();
+      x$.duration(500);
+      x$.attr('d', function(line){
+        return this$.line(line.datapoints);
+      });
+      if (!scaleIsExpanding) {
+        return transition.delay(500);
+      }
+    };
+    prototype.rescaleAxes = function(scaleIsExpanding){
+      var x$, tickTransition, this$ = this;
+      x$ = tickTransition = this.yAxisGroup.selectAll(".tick").transition();
+      x$.duration(500);
+      x$.attr('transform', function(it){
+        return "translate(0, " + this$.scale_y(it) + ")";
+      });
+      if (!scaleIsExpanding) {
+        return tickTransition.delay(400);
+      }
     };
     prototype.setupZoom = function(){
       var x$, y$;
