@@ -13,13 +13,13 @@ window.Graph = class Graph
         @drawing = @svg.append \g
             ..attr \transform "translate(#{@margin.3}, #{@margin.0})"
             ..attr \class \drawing
-        @datapaths = @drawing.append \g
-            ..attr \class \datapaths
-
         @xAxisGroup = @drawing.append \g
             ..attr \class "x axis"
         @yAxisGroup = @drawing.append \g
             ..attr \class "y axis"
+        @datapaths = @drawing.append \g
+            ..attr \class \datapaths
+
 
         min_date = Math.min ...@lines.map ->
              it.datapoints[0].date

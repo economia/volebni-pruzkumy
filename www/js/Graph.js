@@ -23,12 +23,12 @@
       y$ = this.drawing = this.svg.append('g');
       y$.attr('transform', "translate(" + this.margin[3] + ", " + this.margin[0] + ")");
       y$.attr('class', 'drawing');
-      z$ = this.datapaths = this.drawing.append('g');
-      z$.attr('class', 'datapaths');
-      z1$ = this.xAxisGroup = this.drawing.append('g');
-      z1$.attr('class', "x axis");
-      z2$ = this.yAxisGroup = this.drawing.append('g');
-      z2$.attr('class', "y axis");
+      z$ = this.xAxisGroup = this.drawing.append('g');
+      z$.attr('class', "x axis");
+      z1$ = this.yAxisGroup = this.drawing.append('g');
+      z1$.attr('class', "y axis");
+      z2$ = this.datapaths = this.drawing.append('g');
+      z2$.attr('class', 'datapaths');
       min_date = Math.min.apply(Math, this.lines.map(function(it){
         return it.datapoints[0].date;
       }));
