@@ -117,16 +117,17 @@
       }).enter().append('path');
       z3$.attr('d', this.datapointSymbol);
       z3$.attr('transform', function(pt){
-        return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
+        return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ") scale(0)";
       });
       z3$.attr('data-tooltip', function(pt){
         return escape("Průzkum agentury <strong>" + pt.agency + "</strong>,\n" + monthsHuman[pt.date.getMonth()] + " " + pt.date.getFullYear() + ":<br />\n" + pt.party + ": <strong>" + pt.percent + "%</strong>");
       });
-      z3$.attr('opacity', 0);
       z3$.call(this.guideRegister);
       z4$ = z3$.transition();
-      z4$.attr('opacity', 1);
       z4$.duration(400);
+      z4$.attr('transform', function(pt){
+        return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ") scale(1)";
+      });
       z4$.delay(function(pt, index){
         return baseDelayExit + index * 20;
       });

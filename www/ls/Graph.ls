@@ -97,16 +97,16 @@ window.Graph = class Graph implements verticalGuide
             .data (.datapoints)
             .enter!append \path
                 ..attr \d @datapointSymbol
-                ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
+                ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent}) scale(0)"
                 ..attr \data-tooltip (pt) ~>
                     escape """Průzkum agentury <strong>#{pt.agency}</strong>,
                     #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
                     #{pt.party}: <strong>#{pt.percent}%</strong>"""
-                ..attr \opacity 0
+
                 ..call @guideRegister
                 ..transition!
-                    ..attr \opacity 1
                     ..duration 400
+                    ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent}) scale(1)"
                     ..delay (pt, index) -> baseDelayExit + index * 20
 
 
