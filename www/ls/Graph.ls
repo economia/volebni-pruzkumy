@@ -68,9 +68,24 @@ window.Graph = class Graph
         @rescaleOtherElements scaleIsExpanding
 
     drawDatapointSymbols: (scaleIsExpanding) ->
-        baseDelay = if scaleIsExpanding then 400 else 0
+        baseDelayExit = if scaleIsExpanding then 400 else 0
+        baseDelayUpdate = if scaleIsExpanding then 0 else 500
         selection = @datapaths.selectAll \g.symbol.notHiding
             .data @currentLines, (.id)
+        selection.exit!
+            ..classed \notHiding no
+            ..transition!
+                ..attr \opacity 0
+                ..duration 800
+                ..remove!
+
+        @datapaths.selectAll \g.symbol.notHiding
+            ..selectAll \path
+                ..transition!
+                    ..delay baseDelayUpdate
+                    ..duration 500
+                    ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
+
         selection.enter!.append \g
             .attr \class "symbol notHiding"
             .attr \opacity 1
@@ -83,13 +98,8 @@ window.Graph = class Graph
                 ..transition!
                     ..attr \opacity 1
                     ..duration 400
-                    ..delay (pt, index) -> baseDelay + index * 20
+                    ..delay (pt, index) -> baseDelayExit + index * 20
 
-        selection.exit!
-            ..transition!
-                ..attr \opacity 0
-                ..duration 800
-                ..remove!
 
     rescaleOtherElements: (scaleIsExpanding)->
         @rescaleAxes scaleIsExpanding

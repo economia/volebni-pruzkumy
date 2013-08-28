@@ -86,31 +86,41 @@
       return this.rescaleOtherElements(scaleIsExpanding);
     };
     prototype.drawDatapointSymbols = function(scaleIsExpanding){
-      var baseDelay, selection, x$, y$, z$, z1$, this$ = this;
-      baseDelay = scaleIsExpanding ? 400 : 0;
+      var baseDelayExit, baseDelayUpdate, selection, x$, y$, z$, z1$, z2$, z3$, z4$, this$ = this;
+      baseDelayExit = scaleIsExpanding ? 400 : 0;
+      baseDelayUpdate = scaleIsExpanding ? 0 : 500;
       selection = this.datapaths.selectAll('g.symbol.notHiding').data(this.currentLines, function(it){
         return it.id;
       });
-      x$ = selection.enter().append('g').attr('class', "symbol notHiding").attr('opacity', 1).selectAll('path').data(function(it){
-        return it.datapoints;
-      }).enter().append('path');
-      x$.attr('d', this.datapointSymbol);
-      x$.attr('transform', function(pt){
+      x$ = selection.exit();
+      x$.classed('notHiding', false);
+      y$ = x$.transition();
+      y$.attr('opacity', 0);
+      y$.duration(800);
+      y$.remove();
+      z$ = this.datapaths.selectAll('g.symbol.notHiding');
+      z1$ = z$.selectAll('path');
+      z2$ = z1$.transition();
+      z2$.delay(baseDelayUpdate);
+      z2$.duration(500);
+      z2$.attr('transform', function(pt){
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
-      x$.attr('opacity', 0);
-      y$ = x$.transition();
-      y$.attr('opacity', 1);
-      y$.duration(400);
-      y$.delay(function(pt, index){
-        return baseDelay + index * 20;
+      z3$ = selection.enter().append('g').attr('class', "symbol notHiding").attr('opacity', 1).selectAll('path').data(function(it){
+        return it.datapoints;
+      }).enter().append('path');
+      z3$.attr('d', this.datapointSymbol);
+      z3$.attr('transform', function(pt){
+        return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
-      z$ = selection.exit();
-      z1$ = z$.transition();
-      z1$.attr('opacity', 0);
-      z1$.duration(800);
-      z1$.remove();
-      return z$;
+      z3$.attr('opacity', 0);
+      z4$ = z3$.transition();
+      z4$.attr('opacity', 1);
+      z4$.duration(400);
+      z4$.delay(function(pt, index){
+        return baseDelayExit + index * 20;
+      });
+      return z3$;
     };
     prototype.rescaleOtherElements = function(scaleIsExpanding){
       this.rescaleAxes(scaleIsExpanding);
