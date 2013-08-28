@@ -75,6 +75,10 @@ body svg {
 body svg .drawing {
   overflow: hidden;
 }
+body svg .verticalGuide {
+  stroke: #ccc;
+  stroke-width: 1px;
+}
 body svg .axis path {
   stroke: #333;
   stroke-width: 1px;

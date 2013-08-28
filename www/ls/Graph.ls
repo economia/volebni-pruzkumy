@@ -1,5 +1,6 @@
 monthsHuman = <[leden únor březen duben květen červen červenec srpen září říjen listopad prosinec]>
-window.Graph = class Graph
+
+window.Graph = class Graph implements verticalGuide
     (@parentSelector, @lines, {width=970_px, height=600_px}={}) ->
         @currentLines = @lines
         @display_agencies = <[median stem factum cvvm]>
@@ -10,6 +11,8 @@ window.Graph = class Graph
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height + @margin.0 + @margin.2
             ..attr \width  @width + @margin.1 + @margin.3
+        @verticalGuideGroup = @svg.append \g
+            ..attr \class \verticalGuide
         @drawing = @svg.append \g
             ..attr \transform "translate(#{@margin.3}, #{@margin.0})"
             ..attr \class \drawing
@@ -36,6 +39,7 @@ window.Graph = class Graph
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
             ..size 90
+        @guideRegister = @registerVerticalGuide!
         @recomputeScales!
         @drawGhost!
         @drawContentLines!
@@ -99,6 +103,7 @@ window.Graph = class Graph
                     #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
                     #{pt.party}: <strong>#{pt.percent}%</strong>"""
                 ..attr \opacity 0
+                ..call @guideRegister
                 ..transition!
                     ..attr \opacity 1
                     ..duration 400

@@ -4,8 +4,9 @@
   window.Graph = Graph = (function(){
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
+    importAll$(prototype, arguments[0]);
     function Graph(parentSelector, lines, arg$){
-      var ref$, width, ref1$, height, x$, y$, z$, z1$, z2$, min_date, max_date, z3$, z4$, z5$, z6$, this$ = this;
+      var ref$, width, ref1$, height, x$, y$, z$, z1$, z2$, z3$, min_date, max_date, z4$, z5$, z6$, z7$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
       ref$ = arg$ != null
@@ -20,36 +21,39 @@
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height + this.margin[0] + this.margin[2]);
       x$.attr('width', this.width + this.margin[1] + this.margin[3]);
-      y$ = this.drawing = this.svg.append('g');
-      y$.attr('transform', "translate(" + this.margin[3] + ", " + this.margin[0] + ")");
-      y$.attr('class', 'drawing');
-      z$ = this.xAxisGroup = this.drawing.append('g');
-      z$.attr('class', "x axis");
-      z1$ = this.yAxisGroup = this.drawing.append('g');
-      z1$.attr('class', "y axis");
-      z2$ = this.datapaths = this.drawing.append('g');
-      z2$.attr('class', 'datapaths');
+      y$ = this.verticalGuideGroup = this.svg.append('g');
+      y$.attr('class', 'verticalGuide');
+      z$ = this.drawing = this.svg.append('g');
+      z$.attr('transform', "translate(" + this.margin[3] + ", " + this.margin[0] + ")");
+      z$.attr('class', 'drawing');
+      z1$ = this.xAxisGroup = this.drawing.append('g');
+      z1$.attr('class', "x axis");
+      z2$ = this.yAxisGroup = this.drawing.append('g');
+      z2$.attr('class', "y axis");
+      z3$ = this.datapaths = this.drawing.append('g');
+      z3$.attr('class', 'datapaths');
       min_date = Math.min.apply(Math, this.lines.map(function(it){
         return it.datapoints[0].date;
       }));
       max_date = Math.max.apply(Math, this.lines.map(function(it){
         return it.datapoints[it.datapoints.length - 1].date;
       }));
-      z3$ = this.scale_x = d3.time.scale();
-      z3$.domain([min_date, max_date]);
-      z3$.range([0, this.width]);
-      z4$ = this.scale_y = d3.scale.linear();
-      z4$.domain([0, 100]);
-      z4$.range([this.height, 0]);
-      z5$ = this.line = d3.svg.line();
-      z5$.x(function(it){
+      z4$ = this.scale_x = d3.time.scale();
+      z4$.domain([min_date, max_date]);
+      z4$.range([0, this.width]);
+      z5$ = this.scale_y = d3.scale.linear();
+      z5$.domain([0, 100]);
+      z5$.range([this.height, 0]);
+      z6$ = this.line = d3.svg.line();
+      z6$.x(function(it){
         return this$.scale_x(it.date.getTime());
       });
-      z5$.y(function(it){
+      z6$.y(function(it){
         return this$.scale_y(it.percent);
       });
-      z6$ = this.datapointSymbol = d3.svg.symbol();
-      z6$.size(90);
+      z7$ = this.datapointSymbol = d3.svg.symbol();
+      z7$.size(90);
+      this.guideRegister = this.registerVerticalGuide();
       this.recomputeScales();
       this.drawGhost();
       this.drawContentLines();
@@ -119,6 +123,7 @@
         return escape("Průzkum agentury <strong>" + pt.agency + "</strong>,\n" + monthsHuman[pt.date.getMonth()] + " " + pt.date.getFullYear() + ":<br />\n" + pt.party + ": <strong>" + pt.percent + "%</strong>");
       });
       z3$.attr('opacity', 0);
+      z3$.call(this.guideRegister);
       z4$ = z3$.transition();
       z4$.attr('opacity', 1);
       z4$.duration(400);
@@ -278,7 +283,11 @@
       return x$;
     };
     return Graph;
-  }());
+  }(verticalGuide));
+  function importAll$(obj, src){
+    for (var key in src) obj[key] = src[key];
+    return obj;
+  }
   function bind$(obj, key, target){
     return function(){ return (target || obj)[key].apply(obj, arguments) };
   }
