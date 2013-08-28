@@ -97,7 +97,9 @@ body svg .axis.x line {
 body svg .datapaths path {
   fill: none;
   stroke: #f00;
-  stroke-width: 1px;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 body svg .datapaths path.cssd {
   stroke: #f29400;
@@ -122,9 +124,6 @@ body svg .datapaths path.kscm {
 }
 body svg .datapaths path.kdu {
   stroke: #000;
-}
-body svg .datapaths path:hover {
-  stroke: #008000;
 }
 body svg .datapaths path.ghost {
   stroke-width: 1px;
