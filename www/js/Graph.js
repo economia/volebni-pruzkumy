@@ -47,7 +47,7 @@
       this.drawAxes();
     }
     prototype.draw = function(){
-      var lines, maxValue, ref$, _, lastMaxValue, scaleIsExpanding, selection;
+      var lines, maxValue, ref$, _, lastMaxValue, scaleIsExpanding, selection, x$, tickTransition, this$ = this;
       lines = this.lines.filter(bind$(this, 'lineFilter'));
       maxValue = Math.max.apply(Math, lines.map(function(it){
         return it.maxValue;
@@ -60,7 +60,15 @@
       });
       this.selectionUpdate(selection, scaleIsExpanding);
       this.selectionExit(selection.exit());
-      return this.selectionEnter(selection.enter(), scaleIsExpanding);
+      this.selectionEnter(selection.enter(), scaleIsExpanding);
+      x$ = tickTransition = this.yAxisGroup.selectAll(".tick").transition();
+      x$.duration(500);
+      x$.attr('transform', function(it){
+        return "translate(0, " + this$.scale_y(it) + ")";
+      });
+      if (!scaleIsExpanding) {
+        return tickTransition.delay(400);
+      }
     };
     prototype.selectionEnter = function(selection, scaleIsExpanding){
       var maxLen, x$, path, y$, transition, this$ = this;

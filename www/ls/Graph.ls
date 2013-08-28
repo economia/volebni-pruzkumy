@@ -46,6 +46,12 @@ window.Graph = class Graph
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
         @selectionEnter selection.enter!, scaleIsExpanding
+        tickTransition = @yAxisGroup.selectAll ".tick" .transition!
+            ..duration 500
+            ..attr \transform ~>"translate(0, #{@scale_y it})"
+        if not scaleIsExpanding
+            tickTransition.delay 400
+
 
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0
