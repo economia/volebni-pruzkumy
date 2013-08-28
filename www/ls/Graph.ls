@@ -35,6 +35,7 @@ window.Graph = class Graph
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
+            ..size 90
         @recomputeScales!
         @drawGhost!
         @drawContentLines!
@@ -86,15 +87,14 @@ window.Graph = class Graph
                     ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
 
         selection.enter!.append \g
-            .attr \class "symbol notHiding"
+            .attr \class (line) -> "symbol notHiding #{line.partyId}"
             .attr \opacity 1
             .selectAll 'path'
             .data (.datapoints)
             .enter!append \path
                 ..attr \d @datapointSymbol
-                ..attr \class (pt, index, parentIndex) ~> @currentLines[parentIndex].partyId
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
-                ..attr \data-tooltip (pt, index, parentIndex) ~>
+                ..attr \data-tooltip (pt) ~>
                     escape """Průzkum agentury <strong>#{pt.agency}</strong>,
                     #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
                     #{pt.party}: <strong>#{pt.percent}%</strong>"""
