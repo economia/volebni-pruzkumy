@@ -37,7 +37,7 @@ window.Graph = class Graph
             ..y ~> @scale_y it.percent
         @recomputeScales!
         @drawGhost!
-        @draw!
+        @drawContentLines!
         @drawAxes!
 
     drawGhost: ->
@@ -54,9 +54,9 @@ window.Graph = class Graph
         @recomputeScales!
         currentMaxValue = @scale_y.domain!.1
         scaleIsExpanding = lastMaxValue and lastMaxValue < currentMaxValue
-        @draw scaleIsExpanding
+        @drawContentLines scaleIsExpanding
 
-    draw: (scaleIsExpanding)->
+    drawContentLines: (scaleIsExpanding)->
         selection = @datapaths.selectAll \path.notHiding
             .data @currentLines, (.id)
         @selectionUpdate selection, scaleIsExpanding

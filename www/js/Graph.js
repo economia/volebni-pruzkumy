@@ -51,7 +51,7 @@
       });
       this.recomputeScales();
       this.drawGhost();
-      this.draw();
+      this.drawContentLines();
       this.drawAxes();
     }
     prototype.drawGhost = function(){
@@ -70,9 +70,9 @@
       this.recomputeScales();
       currentMaxValue = this.scale_y.domain()[1];
       scaleIsExpanding = lastMaxValue && lastMaxValue < currentMaxValue;
-      return this.draw(scaleIsExpanding);
+      return this.drawContentLines(scaleIsExpanding);
     };
-    prototype.draw = function(scaleIsExpanding){
+    prototype.drawContentLines = function(scaleIsExpanding){
       var selection;
       selection = this.datapaths.selectAll('path.notHiding').data(this.currentLines, function(it){
         return it.id;
