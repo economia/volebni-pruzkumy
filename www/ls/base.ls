@@ -66,7 +66,7 @@ generateSelectors = ->
             ..length = 0
         inputs = $partySelectors .find "input:checked"
         inputs.each -> parties.push @value
-        graph.draw!
+        graph.redraw!
 
 class Datapoint
     ([@party, date, percent, @agency])->

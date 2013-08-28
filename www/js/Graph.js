@@ -8,6 +8,7 @@
       var x$, y$, z$, z1$, z2$, min_date, max_date, z3$, z4$, z5$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
+      this.currentLines = this.lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
       this.margin = [0, 10, 50, 34];
@@ -44,19 +45,32 @@
       z5$.y(function(it){
         return this$.scale_y(it.percent);
       });
+      this.recomputeScales();
+      this.drawGhost();
       this.draw();
       this.drawAxes();
     }
-    prototype.draw = function(){
-      var lines, maxValue, ref$, _, lastMaxValue, scaleIsExpanding, selection, x$, tickTransition, this$ = this;
-      lines = this.lines.filter(bind$(this, 'lineFilter'));
-      maxValue = Math.max.apply(Math, lines.map(function(it){
-        return it.maxValue;
-      }));
-      ref$ = this.scale_y.domain(), _ = ref$[0], lastMaxValue = ref$[1];
-      scaleIsExpanding = lastMaxValue && lastMaxValue < maxValue;
-      this.scale_y.domain([0, maxValue]);
-      selection = this.datapaths.selectAll('path.active').data(lines, function(it){
+    prototype.drawGhost = function(){
+      var x$, this$ = this;
+      x$ = this.datapaths.selectAll("path.ghost").data(this.lines).enter().append('path');
+      x$.attr('class', 'ghost');
+      x$.attr('d', function(line){
+        return this$.line(line.datapoints);
+      });
+      return x$;
+    };
+    prototype.redraw = function(){
+      var lastMaxValue, currentMaxValue, scaleIsExpanding;
+      this.currentLines = this.lines.filter(bind$(this, 'lineFilter'));
+      lastMaxValue = this.scale_y.domain()[1];
+      this.recomputeScales();
+      currentMaxValue = this.scale_y.domain()[1];
+      scaleIsExpanding = lastMaxValue && lastMaxValue < currentMaxValue;
+      return this.draw(scaleIsExpanding);
+    };
+    prototype.draw = function(scaleIsExpanding){
+      var selection, x$, tickTransition, this$ = this;
+      selection = this.datapaths.selectAll('path.active').data(this.currentLines, function(it){
         return it.id;
       });
       this.selectionUpdate(selection, scaleIsExpanding);
@@ -70,6 +84,13 @@
       if (!scaleIsExpanding) {
         return tickTransition.delay(400);
       }
+    };
+    prototype.recomputeScales = function(){
+      var maxValue;
+      maxValue = Math.max.apply(Math, this.currentLines.map(function(it){
+        return it.maxValue;
+      }));
+      return this.scale_y.domain([0, maxValue]);
     };
     prototype.selectionEnter = function(selection, scaleIsExpanding){
       var maxLen, x$, path, y$, transition, this$ = this;

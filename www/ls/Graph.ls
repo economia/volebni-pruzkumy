@@ -1,6 +1,7 @@
 monthsHuman = <[led únr břz dub kvt čvn čvc srp zář říj lst prs]>
 window.Graph = class Graph
     (@parentSelector, @lines) ->
+        @currentLines = @lines
         @display_agencies = <[median stem factum cvvm]>
         @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @margin = [0 10 50 34] # trbl
@@ -33,17 +34,30 @@ window.Graph = class Graph
         @line = d3.svg.line!
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
+        @recomputeScales!
+        @drawGhost!
         @draw!
         @drawAxes!
 
-    draw: ->
-        lines = @lines.filter @~lineFilter
-        maxValue = Math.max ...lines.map (.maxValue)
-        [_, lastMaxValue] = @scale_y.domain!
-        scaleIsExpanding = lastMaxValue and lastMaxValue < maxValue
-        @scale_y.domain [0 maxValue]
+    drawGhost: ->
+        @datapaths.selectAll "path.ghost"
+            .data @lines
+            .enter!
+            .append \path
+                ..attr \class \ghost
+                ..attr \d (line) ~> @line line.datapoints
+
+    redraw: ->
+        @currentLines = @lines.filter @~lineFilter
+        lastMaxValue = @scale_y.domain!.1
+        @recomputeScales!
+        currentMaxValue = @scale_y.domain!.1
+        scaleIsExpanding = lastMaxValue and lastMaxValue < currentMaxValue
+        @draw scaleIsExpanding
+
+    draw: (scaleIsExpanding)->
         selection = @datapaths.selectAll \path.active
-            .data lines, (.id)
+            .data @currentLines, (.id)
         @selectionUpdate selection, scaleIsExpanding
         @selectionExit selection.exit!
         @selectionEnter selection.enter!, scaleIsExpanding
@@ -53,6 +67,9 @@ window.Graph = class Graph
         if not scaleIsExpanding
             tickTransition.delay 400
 
+    recomputeScales: ->
+        maxValue = Math.max ...@currentLines.map (.maxValue)
+        @scale_y.domain [0 maxValue]
 
     selectionEnter: (selection, scaleIsExpanding) ->
         maxLen = 0

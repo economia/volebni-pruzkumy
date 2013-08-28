@@ -111,3 +111,7 @@ body svg .datapaths path.kdu {
 body svg .datapaths path:hover {
   stroke: #008000;
 }
+body svg .datapaths path.ghost {
+  stroke-width: 1px;
+  stroke: #666;
+}

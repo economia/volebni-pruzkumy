@@ -86,7 +86,7 @@
       inputs.each(function(){
         return parties.push(this.value);
       });
-      return graph.draw();
+      return graph.redraw();
     });
   };
   Datapoint = (function(){
