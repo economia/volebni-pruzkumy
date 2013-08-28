@@ -92,7 +92,7 @@ window.Graph = class Graph
         yAxis = d3.svg.axis!
             ..scale @scale_y
             ..tickSize @width
-            ..tickFormat -> if it then "#it%" else ""
+            ..tickFormat -> if it and 0 == it % 10 then "#it%" else ""
             ..orient \right
         @yAxisGroup
             ..call yAxis

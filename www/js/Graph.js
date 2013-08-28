@@ -128,7 +128,7 @@
       x$.scale(this.scale_y);
       x$.tickSize(this.width);
       x$.tickFormat(function(it){
-        if (it) {
+        if (it && 0 === it % 10) {
           return it + "%";
         } else {
           return "";
