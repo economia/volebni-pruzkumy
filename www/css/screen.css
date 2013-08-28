@@ -20,51 +20,51 @@ body #wrap .selectors > div {
   float: left;
   clear: left;
 }
-body #wrap .selectors .pair {
+body #wrap .selectors > div .pair {
   float: left;
 }
-body #wrap .selectors .pair input {
+body #wrap .selectors > div .pair input {
   display: none;
 }
-body #wrap .selectors .pair label {
+body #wrap .selectors > div .pair label {
   display: block;
   margin: 3px;
   padding: 4px 6px;
   cursor: pointer;
   background: #eee;
 }
-body #wrap .selectors .pair label:hover {
+body #wrap .selectors > div .pair label:hover {
   opacity: 0.7;
 }
-body #wrap .selectors .pair input:checked + label {
+body #wrap .selectors > div .pair input:checked + label {
   background: #85bee6;
 }
-body #wrap .selectors .pair input:checked + label.cssd {
+body #wrap .selectors > div .pair input:checked + label.cssd {
   background: #f29400;
 }
-body #wrap .selectors .pair input:checked + label.vv {
+body #wrap .selectors > div .pair input:checked + label.vv {
   background: #84d0f1;
 }
-body #wrap .selectors .pair input:checked + label.spoz {
+body #wrap .selectors > div .pair input:checked + label.spoz {
   background: #fb9a99;
 }
-body #wrap .selectors .pair input:checked + label.ods {
+body #wrap .selectors > div .pair input:checked + label.ods {
   background: #006ab3;
   color: #fff;
 }
-body #wrap .selectors .pair input:checked + label.top {
+body #wrap .selectors > div .pair input:checked + label.top {
   background: #7c0042;
   color: #fff;
 }
-body #wrap .selectors .pair input:checked + label.sz {
+body #wrap .selectors > div .pair input:checked + label.sz {
   background: #00ad00;
   color: #fff;
 }
-body #wrap .selectors .pair input:checked + label.kscm {
+body #wrap .selectors > div .pair input:checked + label.kscm {
   background: #e3001a;
   color: #fff;
 }
-body #wrap .selectors .pair input:checked + label.kdu {
+body #wrap .selectors > div .pair input:checked + label.kdu {
   background: #000;
   color: #fff;
 }
