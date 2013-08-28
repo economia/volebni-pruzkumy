@@ -12,7 +12,7 @@ body #wrap .selectors {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 80px;
+  height: 72px;
   width: 100%;
   background: #fff;
 }
@@ -128,7 +128,14 @@ body svg .datapaths path.kdu {
 body svg .datapaths .symbol path {
   fill: #fff;
 }
+body svg .datapaths .symbol path:hover {
+  cursor: pointer;
+  fill: #000;
+}
 body svg .datapaths path.ghost {
   stroke-width: 1px;
   stroke: #ddd;
+}
+.tooltip {
+  max-width: 800px;
 }

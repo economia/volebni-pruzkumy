@@ -1,6 +1,6 @@
 (function(){
   var monthsHuman, Graph;
-  monthsHuman = ['led', 'únr', 'břz', 'dub', 'kvt', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lst', 'prs'];
+  monthsHuman = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
   window.Graph = Graph = (function(){
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
@@ -116,6 +116,9 @@
       z3$.attr('transform', function(pt){
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
+      z3$.attr('data-tooltip', function(pt, index, parentIndex){
+        return escape("Průzkum agentury <strong>" + pt.agency + "</strong>,\n" + monthsHuman[pt.date.getMonth()] + " " + pt.date.getFullYear() + ":<br />\n" + pt.party + ": <strong>" + pt.percent + "%</strong>");
+      });
       z3$.attr('opacity', 0);
       z4$ = z3$.transition();
       z4$.attr('opacity', 1);
@@ -145,9 +148,6 @@
       });
       x$.attr('d', function(line){
         return this$.line(line.datapoints);
-      });
-      x$.attr('data-tooltip', function(line){
-        return line.id;
       });
       x$.attr('pathLength', '10');
       x$.attr('stroke-dasharray', function(){

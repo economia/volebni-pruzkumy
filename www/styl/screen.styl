@@ -11,7 +11,7 @@ body
             position absolute
             top 0px
             left 0px
-            height 80px
+            height 72px
             width 100%
             background white
             > div
@@ -105,6 +105,11 @@ body
             .symbol
                 path
                     fill white
+                    &:hover
+                        cursor pointer
+                        fill black
             path.ghost
                 stroke-width 1px
                 stroke #ddd
+.tooltip
+    max-width 800px

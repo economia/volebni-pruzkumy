@@ -1,4 +1,4 @@
-monthsHuman = <[led únr břz dub kvt čvn čvc srp zář říj lst prs]>
+monthsHuman = <[leden únor březen duben květen červen červenec srpen září říjen listopad prosinec]>
 window.Graph = class Graph
     (@parentSelector, @lines, {width=970_px, height=600_px}={}) ->
         @currentLines = @lines
@@ -95,6 +95,10 @@ window.Graph = class Graph
                 ..attr \d @datapointSymbol
                 ..attr \class (pt, index, parentIndex) ~> @currentLines[parentIndex].partyId
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
+                ..attr \data-tooltip (pt, index, parentIndex) ~>
+                    escape """Průzkum agentury <strong>#{pt.agency}</strong>,
+                    #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
+                    #{pt.party}: <strong>#{pt.percent}%</strong>"""
                 ..attr \opacity 0
                 ..transition!
                     ..attr \opacity 1
@@ -116,8 +120,6 @@ window.Graph = class Graph
             ..attr \class (line) -> "#{line.partyId} #{line.agencyId} active line notHiding"
             ..attr \d (line) ~>
                 @line line.datapoints
-            ..attr \data-tooltip (line) ->
-                line.id
             ..attr \pathLength \10
             ..attr \stroke-dasharray ->
                 len = @getTotalLength!
