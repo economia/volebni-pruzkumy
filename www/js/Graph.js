@@ -86,18 +86,23 @@
       return this.rescaleOtherElements(scaleIsExpanding);
     };
     prototype.drawDatapointSymbols = function(){
-      var selection, x$, this$ = this;
+      var selection, x$, y$, z$, this$ = this;
       selection = this.datapaths.selectAll('g.symbol.notHiding').data(this.currentLines, function(it){
         return it.id;
       });
-      x$ = selection.enter().append('g').attr('class', "symbol notHiding").selectAll('path').data(function(it){
+      x$ = selection.enter().append('g').attr('class', "symbol notHiding").attr('opacity', 1).selectAll('path').data(function(it){
         return it.datapoints;
       }).enter().append('path');
       x$.attr('d', this.datapointSymbol);
       x$.attr('transform', function(pt){
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
-      return x$;
+      y$ = selection.exit();
+      z$ = y$.transition();
+      z$.attr('opacity', 0);
+      z$.duration(800);
+      z$.remove();
+      return y$;
     };
     prototype.rescaleOtherElements = function(scaleIsExpanding){
       this.rescaleAxes(scaleIsExpanding);

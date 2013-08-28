@@ -72,11 +72,17 @@ window.Graph = class Graph
             .data @currentLines, (.id)
         selection.enter!.append \g
             .attr \class "symbol notHiding"
+            .attr \opacity 1
             .selectAll 'path'
             .data (.datapoints)
             .enter!append \path
                 ..attr \d @datapointSymbol
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
+        selection.exit!
+            ..transition!
+                ..attr \opacity 0
+                ..duration 800
+                ..remove!
 
     rescaleOtherElements: (scaleIsExpanding)->
         @rescaleAxes scaleIsExpanding
