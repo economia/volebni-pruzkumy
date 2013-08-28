@@ -19,12 +19,12 @@ window.Graph = class Graph
         @yAxisGroup = @drawing.append \g
             ..attr \class "y axis"
 
-        @min_date = Math.min ...@lines.map ->
-             it.datapoints[0].date.getTime!
-        @max_date = Math.max ...@lines.map ->
-             it.datapoints[it.datapoints.length - 1].date.getTime!
-        @scale_x = d3.scale.linear!
-            ..domain [@min_date, @max_date]
+        min_date = Math.min ...@lines.map ->
+             it.datapoints[0].date
+        max_date = Math.max ...@lines.map ->
+             it.datapoints[it.datapoints.length - 1].date
+        @scale_x = d3.time.scale!
+            ..domain [min_date, max_date]
             ..range [0 @width]
         @scale_y = d3.scale.linear!
             ..domain [0 100]

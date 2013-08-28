@@ -4,7 +4,7 @@
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
     function Graph(parentSelector, lines){
-      var x$, y$, z$, z1$, z2$, z3$, z4$, z5$, this$ = this;
+      var x$, y$, z$, z1$, z2$, min_date, max_date, z3$, z4$, z5$, this$ = this;
       this.parentSelector = parentSelector;
       this.lines = lines;
       this.display_agencies = ['median', 'stem', 'factum', 'cvvm'];
@@ -24,14 +24,14 @@
       z1$.attr('class', "x axis");
       z2$ = this.yAxisGroup = this.drawing.append('g');
       z2$.attr('class', "y axis");
-      this.min_date = Math.min.apply(Math, this.lines.map(function(it){
-        return it.datapoints[0].date.getTime();
+      min_date = Math.min.apply(Math, this.lines.map(function(it){
+        return it.datapoints[0].date;
       }));
-      this.max_date = Math.max.apply(Math, this.lines.map(function(it){
-        return it.datapoints[it.datapoints.length - 1].date.getTime();
+      max_date = Math.max.apply(Math, this.lines.map(function(it){
+        return it.datapoints[it.datapoints.length - 1].date;
       }));
-      z3$ = this.scale_x = d3.scale.linear();
-      z3$.domain([this.min_date, this.max_date]);
+      z3$ = this.scale_x = d3.time.scale();
+      z3$.domain([min_date, max_date]);
       z3$.range([0, this.width]);
       z4$ = this.scale_y = d3.scale.linear();
       z4$.domain([0, 100]);
