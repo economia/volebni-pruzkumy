@@ -1,5 +1,6 @@
 (function(){
-  var Graph;
+  var monthsHuman, Graph;
+  monthsHuman = ['led', 'únr', 'břz', 'dub', 'kvt', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lst', 'prs'];
   window.Graph = Graph = (function(){
     Graph.displayName = 'Graph';
     var prototype = Graph.prototype, constructor = Graph;
@@ -11,7 +12,7 @@
       this.display_parties = ['cssd', 'vv', 'spoz', 'ods', 'top', 'sz', 'kscm', 'kdu'];
       this.width = 630;
       this.height = 600;
-      this.margin = [20, 0, 0, 34];
+      this.margin = [0, 10, 50, 34];
       x$ = this.svg = d3.select(parentSelector).append('svg');
       x$.attr('height', this.height + this.margin[0] + this.margin[2]);
       x$.attr('width', this.width + this.margin[1] + this.margin[3]);
@@ -131,6 +132,35 @@
       return in$(line.agencyId, this.display_agencies) && in$(line.partyId, this.display_parties);
     };
     prototype.drawAxes = function(){
+      this.drawYAxis();
+      return this.drawXAxis();
+    };
+    prototype.drawXAxis = function(){
+      var x$, xAxis, y$, z$;
+      x$ = xAxis = d3.svg.axis();
+      x$.scale(this.scale_x);
+      x$.ticks(d3.time.months);
+      x$.tickFormat(function(it){
+        return monthsHuman[it.getMonth()];
+      });
+      x$.tickSize(5);
+      x$.outerTickSize(0);
+      x$.orient('bottom');
+      y$ = this.xAxisGroup;
+      y$.attr('transform', "translate(0, " + (this.height + this.margin[0]) + ")");
+      y$.call(xAxis);
+      z$ = y$.selectAll('text');
+      z$.attr('dy', function(it){
+        switch (false) {
+        case !(it.getMonth() % 2):
+          return 19;
+        default:
+          return 7;
+        }
+      });
+      return y$;
+    };
+    prototype.drawYAxis = function(){
       var x$, yAxis, y$, z$, z1$, z2$;
       x$ = yAxis = d3.svg.axis();
       x$.scale(this.scale_y);

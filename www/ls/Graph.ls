@@ -1,10 +1,11 @@
+monthsHuman = <[led únr břz dub kvt čvn čvc srp zář říj lst prs]>
 window.Graph = class Graph
     (@parentSelector, @lines) ->
         @display_agencies = <[median stem factum cvvm]>
         @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @width = 630_px
         @height = 600_px
-        @margin = [20 0 0 34] # trbl
+        @margin = [0 10 50 34] # trbl
         @svg = d3.select parentSelector .append \svg
             ..attr \height @height + @margin.0 + @margin.2
             ..attr \width  @width + @margin.1 + @margin.3
@@ -95,6 +96,28 @@ window.Graph = class Graph
         line.agencyId in @display_agencies and line.partyId in @display_parties
 
     drawAxes: ->
+        @drawYAxis!
+        @drawXAxis!
+
+    drawXAxis: ->
+        xAxis = d3.svg.axis!
+            ..scale @scale_x
+            ..ticks d3.time.months
+            ..tickFormat ->
+                monthsHuman[it.getMonth!]
+            ..tickSize 5
+            ..outerTickSize 0
+            ..orient \bottom
+        @xAxisGroup
+            ..attr \transform "translate(0, #{@height + @margin.0})"
+            ..call xAxis
+            ..selectAll \text
+                ..attr \dy ->
+                    switch
+                    | it.getMonth! % 2 => 19
+                    | otherwise        => 7
+
+    drawYAxis: ->
         yAxis = d3.svg.axis!
             ..scale @scale_y
             ..tickSize @width
