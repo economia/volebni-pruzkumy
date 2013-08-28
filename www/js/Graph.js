@@ -139,10 +139,7 @@
       var x$, xAxis, y$, z$;
       x$ = xAxis = d3.svg.axis();
       x$.scale(this.scale_x);
-      x$.ticks(d3.time.months);
-      x$.tickFormat(function(it){
-        return monthsHuman[it.getMonth()];
-      });
+      x$.ticks(d3.time.years);
       x$.tickSize(3);
       x$.outerTickSize(0);
       x$.orient('bottom');
@@ -150,14 +147,7 @@
       y$.attr('transform', "translate(0, " + (this.height + this.margin[0]) + ")");
       y$.call(xAxis);
       z$ = y$.selectAll('text');
-      z$.attr('dy', function(it){
-        switch (false) {
-        case !(it.getMonth() % 2):
-          return 21;
-        default:
-          return 9;
-        }
-      });
+      z$.attr('dy', 9);
       return y$;
     };
     prototype.drawYAxis = function(){
