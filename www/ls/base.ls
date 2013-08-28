@@ -69,6 +69,10 @@ generateSelectors = ->
         inputs.each -> parties.push @value
         graph.redraw!
 
+    setInterval do
+        -> $ 'input[value=ods]' .trigger \click
+        1000
+
 class Datapoint
     ([@party, date, percent, @agency])->
         @lineId = "#{@party}-#{@agency}"

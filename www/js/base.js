@@ -77,7 +77,7 @@
       z6$ = $("<label for='chc-" + partyId + "' class='" + partyId + "'>" + party + "</label>");
       z6$.appendTo($pair);
     }
-    return $('body').on('change', 'input', function(){
+    $('body').on('change', 'input', function(){
       var x$, agencies, inputs, y$, parties;
       x$ = agencies = graph.display_agencies;
       x$.length = 0;
@@ -93,6 +93,9 @@
       });
       return graph.redraw();
     });
+    return setInterval(function(){
+      return $('input[value=ods]').trigger('click');
+    }, 1000);
   };
   Datapoint = (function(){
     Datapoint.displayName = 'Datapoint';
