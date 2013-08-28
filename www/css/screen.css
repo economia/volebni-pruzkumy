@@ -125,6 +125,9 @@ body svg .datapaths path.kscm {
 body svg .datapaths path.kdu {
   stroke: #000;
 }
+body svg .datapaths .symbol path {
+  fill: #fff;
+}
 body svg .datapaths path.ghost {
   stroke-width: 1px;
   stroke: #ddd;

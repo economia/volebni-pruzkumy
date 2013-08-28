@@ -110,6 +110,9 @@
         return it.datapoints;
       }).enter().append('path');
       z3$.attr('d', this.datapointSymbol);
+      z3$.attr('class', function(pt, index, parentIndex){
+        return this$.currentLines[parentIndex].partyId;
+      });
       z3$.attr('transform', function(pt){
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });

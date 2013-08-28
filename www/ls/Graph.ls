@@ -93,6 +93,7 @@ window.Graph = class Graph
             .data (.datapoints)
             .enter!append \path
                 ..attr \d @datapointSymbol
+                ..attr \class (pt, index, parentIndex) ~> @currentLines[parentIndex].partyId
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
                 ..attr \opacity 0
                 ..transition!
