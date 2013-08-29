@@ -91,6 +91,16 @@ generateSelectors = ->
                 partySelected := no
             $inputs.each -> parties.push @value
         graph.redraw!
+    $ \body .on \mouseover \label (evt) ->
+        $ele = $ @
+        $input = $ '#' + $ele.attr \for
+        graph.datapaths.selectAll "g.symbol.#{$input.val!} path"
+            ..classed \active yes
+    $ \body .on \mouseout \label (evt) ->
+        $ele = $ @
+        $input = $ '#' + $ele.attr \for
+        graph.datapaths.selectAll "g.symbol.#{$input.val!} path"
+            ..classed \active no
 
 class Datapoint
     ([@party, date, percent, @agency])->

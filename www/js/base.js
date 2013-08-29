@@ -92,7 +92,7 @@
       z7$.appendTo($pair);
     }
     partySelected = agencySelected = false;
-    return $('body').on('change', 'input', function(evt){
+    $('body').on('change', 'input', function(evt){
       var $ele, x$, agencies, $inputs, y$, parties;
       $ele = $(this);
       x$ = agencies = graph.display_agencies;
@@ -136,6 +136,22 @@
         });
       }
       return graph.redraw();
+    });
+    $('body').on('mouseover', 'label', function(evt){
+      var $ele, $input, x$;
+      $ele = $(this);
+      $input = $('#' + $ele.attr('for'));
+      x$ = graph.datapaths.selectAll("g.symbol." + $input.val() + " path");
+      x$.classed('active', true);
+      return x$;
+    });
+    return $('body').on('mouseout', 'label', function(evt){
+      var $ele, $input, x$;
+      $ele = $(this);
+      $input = $('#' + $ele.attr('for'));
+      x$ = graph.datapaths.selectAll("g.symbol." + $input.val() + " path");
+      x$.classed('active', false);
+      return x$;
     });
   };
   Datapoint = (function(){

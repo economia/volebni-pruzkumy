@@ -166,50 +166,58 @@ body svg .datapaths .symbol path:hover {
 body svg .datapaths .symbol.cssd path {
   stroke: #f29400;
 }
-body svg .datapaths .symbol.cssd path:hover {
-  fill: #ffc15e;
+body svg .datapaths .symbol.cssd path:hover,
+body svg .datapaths .symbol.cssd path.active {
+  fill: #ffe0af;
 }
 body svg .datapaths .symbol.vv path {
   stroke: #84d0f1;
 }
-body svg .datapaths .symbol.vv path:hover {
-  fill: #b5e3f7;
+body svg .datapaths .symbol.vv path:hover,
+body svg .datapaths .symbol.vv path.active {
+  fill: #daf1fb;
 }
 body svg .datapaths .symbol.spoz path {
   stroke: #fb9a99;
 }
-body svg .datapaths .symbol.spoz path:hover {
-  fill: #fdc2c2;
+body svg .datapaths .symbol.spoz path:hover,
+body svg .datapaths .symbol.spoz path.active {
+  fill: #fee1e0;
 }
 body svg .datapaths .symbol.ods path {
   stroke: #006ab3;
 }
-body svg .datapaths .symbol.ods path:hover {
-  fill: #38aeff;
+body svg .datapaths .symbol.ods path:hover,
+body svg .datapaths .symbol.ods path.active {
+  fill: #9cd7ff;
 }
 body svg .datapaths .symbol.top path {
   stroke: #7c0042;
 }
-body svg .datapaths .symbol.top path:hover {
-  fill: #ff1793;
+body svg .datapaths .symbol.top path:hover,
+body svg .datapaths .symbol.top path.active {
+  fill: #ff8bc9;
 }
 body svg .datapaths .symbol.sz path {
   stroke: #00ad00;
 }
-body svg .datapaths .symbol.sz path:hover {
-  fill: #35ff35;
+body svg .datapaths .symbol.sz path:hover,
+body svg .datapaths .symbol.sz path.active {
+  fill: #9aff9a;
 }
 body svg .datapaths .symbol.kscm path {
   stroke: #e3001a;
 }
-body svg .datapaths .symbol.kscm path:hover {
-  fill: #ff5569;
+body svg .datapaths .symbol.kscm path:hover,
+body svg .datapaths .symbol.kscm path.active {
+  fill: #ffaab4;
 }
 body svg .datapaths .symbol.kdu path {
   stroke: #000;
 }
-body svg .datapaths .symbol.kdu path:hover {
-  fill: #666;
+body svg .datapaths .symbol.kdu path:hover,
+body svg .datapaths .symbol.kdu path.active {
+  fill: #b3b3b3;
 }
 body svg .datapaths path.ghost {
   stroke-width: 1px;

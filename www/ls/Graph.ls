@@ -91,7 +91,7 @@ window.Graph = class Graph implements verticalGuide
                     ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent})"
 
         selection.enter!.append \g
-            .attr \class (line) -> "symbol notHiding #{line.partyId}"
+            .attr \class (line) -> "symbol notHiding #{line.partyId} #{line.agencyId}"
             .attr \opacity 1
             .selectAll 'path'
             .data (.datapoints)

@@ -111,7 +111,7 @@
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ")";
       });
       z3$ = selection.enter().append('g').attr('class', function(line){
-        return "symbol notHiding " + line.partyId;
+        return "symbol notHiding " + line.partyId + " " + line.agencyId;
       }).attr('opacity', 1).selectAll('path').data(function(it){
         return it.datapoints;
       }).enter().append('path');
