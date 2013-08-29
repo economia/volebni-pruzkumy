@@ -15,6 +15,7 @@ agencies_to_ids =
     "STEM":   id: \stem   text: "Quia, soluta accusantium vero!"
     "Factum": id: \factum text: "Suscipit, unde tenetur optio!"
     "CVVM":   id: \cvvm   text: "Ea, corrupti pariatur animi."
+    "Volby":   id: \volby   text: "Volby do Poslanecké sněmovny 2010"
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([party, date, percent, agency]) ->

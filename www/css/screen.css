@@ -163,6 +163,30 @@ body svg .datapaths .symbol path {
 body svg .datapaths .symbol path:hover {
   cursor: pointer;
 }
+body svg .datapaths .symbol.volby.cssd path {
+  fill: #f29400;
+}
+body svg .datapaths .symbol.volby.vv path {
+  fill: #84d0f1;
+}
+body svg .datapaths .symbol.volby.spoz path {
+  fill: #fb9a99;
+}
+body svg .datapaths .symbol.volby.ods path {
+  fill: #006ab3;
+}
+body svg .datapaths .symbol.volby.top path {
+  fill: #7c0042;
+}
+body svg .datapaths .symbol.volby.sz path {
+  fill: #00ad00;
+}
+body svg .datapaths .symbol.volby.kscm path {
+  fill: #e3001a;
+}
+body svg .datapaths .symbol.volby.kdu path {
+  fill: #000;
+}
 body svg .datapaths .symbol.cssd path {
   stroke: #f29400;
 }

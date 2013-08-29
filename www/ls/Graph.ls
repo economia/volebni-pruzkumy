@@ -99,9 +99,13 @@ window.Graph = class Graph implements verticalGuide
                 ..attr \d @datapointSymbol
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent}) scale(0)"
                 ..attr \data-tooltip (pt) ~>
-                    escape """Průzkum agentury <strong>#{pt.agency}</strong>,
-                    #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
-                    #{pt.party}: <strong>#{pt.percent}%</strong>"""
+                    escape if pt.agency isnt \Volby
+                        """Průzkum agentury <strong>#{pt.agency}</strong>,
+                        #{monthsHuman[pt.date.getMonth!]} #{pt.date.getFullYear!}:<br />
+                        #{pt.party}: <strong>#{pt.percent}%</strong>"""
+                    else
+                        """Volební výsledek #{pt.party} v roce 2010: <strong>#{pt.percent}%</strong>"""
+
 
                 ..call @guideRegister
                 ..transition!

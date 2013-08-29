@@ -120,7 +120,9 @@
         return "translate(" + this$.scale_x(pt.date) + ", " + this$.scale_y(pt.percent) + ") scale(0)";
       });
       z3$.attr('data-tooltip', function(pt){
-        return escape("Průzkum agentury <strong>" + pt.agency + "</strong>,\n" + monthsHuman[pt.date.getMonth()] + " " + pt.date.getFullYear() + ":<br />\n" + pt.party + ": <strong>" + pt.percent + "%</strong>");
+        return escape(pt.agency !== 'Volby'
+          ? "Průzkum agentury <strong>" + pt.agency + "</strong>,\n" + monthsHuman[pt.date.getMonth()] + " " + pt.date.getFullYear() + ":<br />\n" + pt.party + ": <strong>" + pt.percent + "%</strong>"
+          : "Volební výsledek " + pt.party + " v roce 2010: <strong>" + pt.percent + "%</strong>");
       });
       z3$.call(this.guideRegister);
       z4$ = z3$.transition();

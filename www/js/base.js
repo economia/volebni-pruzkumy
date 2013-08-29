@@ -29,6 +29,10 @@
     "CVVM": {
       id: 'cvvm',
       text: "Ea, corrupti pariatur animi."
+    },
+    "Volby": {
+      id: 'volby',
+      text: "Volby do Poslanecké sněmovny 2010"
     }
   };
   window.init = function(data){
