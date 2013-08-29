@@ -100,9 +100,6 @@ body svg {
   margin: 0px;
   float: left;
 }
-body svg .drawing {
-  overflow: hidden;
-}
 body svg .verticalGuide {
   stroke: #ccc;
   stroke-width: 1px;
