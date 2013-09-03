@@ -18,9 +18,9 @@ agencies_to_ids =
     "Volby":   id: \volby   text: "Volby do Poslanecké sněmovny 2010"
 window.init = (data) ->
     lines_assoc = {}
-    data.pruzkumy .= filter ([party, date, percent, agency]) ->
+    data.pruzkumy .= filter ([date, party, percent, agency]) ->
         percent.length > 1
-    datapoints = data.pruzkumy.map ([party, date, percent, agency]:datum) ->
+    datapoints = data.pruzkumy.map ([date, party, percent, agency]:datum) ->
         datapoint = new Datapoint datum
         line = lines_assoc[datapoint.lineId]
         if not line
@@ -104,7 +104,7 @@ generateSelectors = ->
             ..classed \active no
 
 class Datapoint
-    ([@party, date, percent, @agency])->
+    ([date, @party, percent, @agency])->
         @lineId = "#{@party}-#{@agency}"
         @date = new Date date
         @percent = parseFloat percent

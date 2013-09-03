@@ -39,13 +39,13 @@
     var lines_assoc, datapoints, width, height;
     lines_assoc = {};
     data.pruzkumy = data.pruzkumy.filter(function(arg$){
-      var party, date, percent, agency;
-      party = arg$[0], date = arg$[1], percent = arg$[2], agency = arg$[3];
+      var date, party, percent, agency;
+      date = arg$[0], party = arg$[1], percent = arg$[2], agency = arg$[3];
       return percent.length > 1;
     });
     datapoints = data.pruzkumy.map(function(datum){
-      var party, date, percent, agency, datapoint, line;
-      party = datum[0], date = datum[1], percent = datum[2], agency = datum[3];
+      var date, party, percent, agency, datapoint, line;
+      date = datum[0], party = datum[1], percent = datum[2], agency = datum[3];
       datapoint = new Datapoint(datum);
       line = lines_assoc[datapoint.lineId];
       if (!line) {
@@ -163,7 +163,7 @@
     var prototype = Datapoint.prototype, constructor = Datapoint;
     function Datapoint(arg$){
       var date, percent;
-      this.party = arg$[0], date = arg$[1], percent = arg$[2], this.agency = arg$[3];
+      date = arg$[0], this.party = arg$[1], percent = arg$[2], this.agency = arg$[3];
       this.lineId = this.party + "-" + this.agency;
       this.date = new Date(date);
       this.percent = parseFloat(percent);
