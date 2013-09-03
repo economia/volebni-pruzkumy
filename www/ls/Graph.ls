@@ -38,7 +38,7 @@ window.Graph = class Graph implements verticalGuide
             ..x ~> @scale_x it.date.getTime!
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
-            ..size 90
+            ..size 45
         @guideRegister = @registerVerticalGuide!
         @recomputeScales!
         @drawGhost!

@@ -52,7 +52,7 @@
         return this$.scale_y(it.percent);
       });
       z7$ = this.datapointSymbol = d3.svg.symbol();
-      z7$.size(90);
+      z7$.size(45);
       this.guideRegister = this.registerVerticalGuide();
       this.recomputeScales();
       this.drawGhost();
