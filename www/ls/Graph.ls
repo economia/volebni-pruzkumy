@@ -106,8 +106,12 @@ window.Graph = class Graph implements verticalGuide
                     else
                         """Volební výsledek #{pt.party} v roce 2010: <strong>#{pt.percent}%</strong>"""
                 ..on \mouseover (pt) ~>
+                    d3.selectAll ".symbol.notHiding.#{pt.partyId}.#{pt.agencyId} path"
+                        ..classed \active yes
                     @showGuide pt
-                ..on \mouseout ~>
+                ..on \mouseout (pt) ~>
+                    d3.selectAll ".symbol.notHiding.#{pt.partyId}.#{pt.agencyId} path"
+                        ..classed \active no
                     @hideGuide!
                 ..transition!
                     ..duration 400

@@ -106,6 +106,8 @@ generateSelectors = ->
 class Datapoint
     ([date, @party, percent, @agency])->
         @lineId = "#{@party}-#{@agency}"
+        @partyId = parties_to_ids[@party]
+        @agencyId = agencies_to_ids[@agency].id
         @date = new Date date
         @percent = parseFloat percent
 
