@@ -67,8 +67,6 @@ body
                     fill white
                     &:hover
                         cursor pointer
-                    &:first-child
-                        display none
                 &.volby
                     &.cssd path
                         fill PartyCSSD
@@ -86,6 +84,8 @@ body
                         fill PartyKSCM
                     &.kdu path
                         fill PartyKDU
+                    path:first-child
+                        display none
 
                 &.cssd
                     path
