@@ -39,7 +39,7 @@ window.Graph = class Graph implements verticalGuide
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
             ..size 45
-        @guideRegister = @registerVerticalGuide!
+        @registerVerticalGuide!
         @recomputeScales!
         @drawGhost!
         @drawContentLines!
@@ -105,9 +105,10 @@ window.Graph = class Graph implements verticalGuide
                         #{pt.party}: <strong>#{pt.percent}%</strong>"""
                     else
                         """Volební výsledek #{pt.party} v roce 2010: <strong>#{pt.percent}%</strong>"""
-
-
-                ..call @guideRegister
+                ..on \mouseover (pt) ~>
+                    @showGuide pt
+                ..on \mouseout ~>
+                    @hideGuide!
                 ..transition!
                     ..duration 400
                     ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent}) scale(1)"
