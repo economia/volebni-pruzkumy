@@ -12,7 +12,7 @@ window.generateStories = ->
         ..addClass \stories
         ..appendTo \#wrap
     $stories = stories.map (story) ->
-        $ "<li>#{story.text}</li>"
+        $ "<li><a>#{story.text} &raquo;</a></li>"
             ..on \click ->
                 displayStory story.parties, story.agencies
             ..appendTo $container
