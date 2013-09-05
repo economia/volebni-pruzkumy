@@ -35,6 +35,8 @@ window.init = (data) ->
     width = $ window .width!
     height = $ window .height!
     window.graph = new Graph '#wrap' lines, {width, height}
+    selectFromHash!
+    graph.draw!
 
 class Datapoint
     ([date, @party, percent, @agency])->

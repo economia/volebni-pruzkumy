@@ -2,8 +2,7 @@ monthsHuman = <[leden únor březen duben květen červen červenec srpen zář�
 
 window.Graph = class Graph implements verticalGuide
     (@parentSelector, @lines, {width=970_px, height=600_px}={}) ->
-        @currentLines = @lines
-        @display_agencies = <[median stem factum cvvm]>
+        @display_agencies = <[median stem factum cvvm volby]>
         @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
         @margin = [132+9+70 10 50 34] # trbl
         @width = width - @margin.1 - @margin.3
@@ -39,6 +38,11 @@ window.Graph = class Graph implements verticalGuide
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
             ..size 45
+        @registerVerticalGuide!
+
+
+    draw: ->
+        @currentLines = @lines.filter @~lineFilter
         @registerVerticalGuide!
         @recomputeScales!
         @drawGhost!
