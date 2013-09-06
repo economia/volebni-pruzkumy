@@ -13,19 +13,19 @@ window.parties_to_ids =
 window.agencies_to_ids =
     "Median":
         id: \median
-        text: "volební model, 1000+ respondentů, osobní dotazování, stratifikovaný náhodný adresní výběr"
+        text: "Volební model, 1000+ respondentů, osobní dotazování, stratifikovaný náhodný adresní výběr. Klikněte pro podrobnosti."
         link: 'http://www.median.cz/?lang=cs&page=4&sub=5#n31'
     "STEM":
         id: \stem
-        text: "stranické preference (podíly preferencí pro jednotlivé strany jsou nižší, než by odpovídalo volebnímu výsledku, protože se do celku počítají i nerozhodnutí), 1000+ respondentů, osobní dotazování, kvótní výběr"
+        text: "Stranické preference (podíly preferencí pro jednotlivé strany jsou nižší, než by odpovídalo volebnímu výsledku, protože se do celku počítají i nerozhodnutí), 1000+ respondentů, osobní dotazování, kvótní výběr. Klikněte pro podrobnosti."
         link: "http://stem.cz/clanek/2768"
     "Factum":
         id: \factum
-        text: "ppm factum: volební model, 900+ respondentů, osobní dotazování, kvótní výběr"
+        text: "Volební model, 900+ respondentů, osobní dotazování, kvótní výběr. Klikněte pro podrobnosti."
         link: "http://www.factum.cz/534_podpora-ods-na-historickem-minimu"
     "CVVM":
         id: \cvvm
-        text: "volební model, 1000+ respondentů, osobní dotazování, kvótní výběr"
+        text: "Volební model, 1000+ respondentů, osobní dotazování, kvótní výběr. Klikněte pro podrobnosti."
         link: "http://cvvm.soc.cas.cz/media/com_form2content/documents/c1/a7037/f3/pv130621.pdf"
     "Volby":
         id: \volby
