@@ -192,7 +192,7 @@ window.Graph = class Graph implements verticalGuide
             ..scale @scale_y
             ..tickSize @width
             ..outerTickSize 0
-            ..tickFormat -> if it and 0 == it % 10 then "#it%" else ""
+            ..tickFormat -> if it and (0 == it % 10 or it in [5 15]) then "#it%" else ""
             ..orient \right
         @yAxisGroup
             ..call yAxis
