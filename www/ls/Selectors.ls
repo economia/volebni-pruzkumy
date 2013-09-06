@@ -12,8 +12,9 @@ window.generateSelectors = ->
             ..appendTo $pair
         $ "<label for='chc-#id'>#agency</label>"
             ..appendTo $pair
-        $ "<a href='#link' class='description' data-tooltip='#text' target='_blank'>?</span>"
-            ..appendTo $pair
+        if text
+            $ "<a href='#link' class='description' data-tooltip='#text' target='_blank'>?</span>"
+                ..appendTo $pair
 
     for party, partyId of parties_to_ids
         $pair = $ "<div class='pair'></div>"
