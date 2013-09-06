@@ -3,7 +3,7 @@ monthsHuman = <[leden únor březen duben květen červen červenec srpen zář�
 window.Graph = class Graph implements verticalGuide
     (@parentSelector, @lines, {width=970_px, height=600_px}={}) ->
         @display_agencies = <[median stem factum cvvm volby]>
-        @display_parties  = <[cssd vv spoz ods top sz kscm kdu]>
+        @display_parties  = <[cssd vv spoz ods top sz kscm kdu suv lev ds lidem svobodni pirati]>
         @margin = [132+9 10 50 34] # trbl
         @width = width - @margin.1 - @margin.3
         @height = height - @margin.0 - @margin.2

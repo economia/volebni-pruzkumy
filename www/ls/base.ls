@@ -10,6 +10,12 @@ window.parties_to_ids =
     "SZ" : \sz
     "KSČM" : \kscm
     "KDU-ČSL" : \kdu
+    "Suverenita" : \suv
+    "LEV 21" : \lev
+    "Dělnická strana" : \ds
+    "LIDEM" : \lidem
+    "Svobodní" : \svobodni
+    "Piráti" : \pirati
 window.agencies_to_ids =
     "Median":
         id: \median

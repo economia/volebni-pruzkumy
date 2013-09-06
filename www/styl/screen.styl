@@ -62,6 +62,18 @@ body
                     stroke PartyKSCM
                 &.kdu
                     stroke PartyKDU
+                &.svobodni
+                    stroke PartySvobodni
+                &.suverenita
+                    stroke PartySuverenita
+                &.lidem
+                    stroke PartyLidem
+                &.ds
+                    stroke PartyDS
+                &.pirati
+                    stroke PartyPirati
+                &.lev
+                    stroke PartyLev
                 &.volby
                     stroke-width 1px
                     stroke-dasharray 5, 5
@@ -87,6 +99,18 @@ body
                         fill PartyKSCM
                     &.kdu path
                         fill PartyKDU
+                    &.PartySvobodni path
+                        fill PartySvobodni
+                    &.PartySuverenita path
+                        fill PartySuverenita
+                    &.PartyLidem path
+                        fill PartyLidem
+                    &.PartyDS path
+                        fill PartyDS
+                    &.PartyPirati path
+                        fill PartyPirati
+                    &.PartyLev path
+                        fill PartyLev
                     path:first-child
                         display none
 
@@ -138,6 +162,42 @@ body
                         &:hover
                         &.active
                             fill PartyKDU
+                &.svobodni
+                    path
+                        stroke PartySvobodni
+                        &:hover
+                        &.active
+                            fill PartySvobodni
+                &.suverenita
+                    path
+                        stroke PartySuverenita
+                        &:hover
+                        &.active
+                            fill PartySuverenita
+                &.lidem
+                    path
+                        stroke PartyLidem
+                        &:hover
+                        &.active
+                            fill PartyLidem
+                &.ds
+                    path
+                        stroke PartyDS
+                        &:hover
+                        &.active
+                            fill PartyDS
+                &.pirati
+                    path
+                        stroke PartyPirati
+                        &:hover
+                        &.active
+                            fill PartyPirati
+                &.lev
+                    path
+                        stroke PartyLev
+                        &:hover
+                        &.active
+                            fill PartyLev
 
             path.ghost
                 stroke-width 1px
