@@ -5,14 +5,14 @@ window.generateSelectors = ->
         ..appendTo $selectors
     $agencySelectors = $ "<div class='agencies'></div>"
         ..appendTo $selectors
-    for agency, {id, text} of agencies_to_ids
+    for agency, {id, text, link} of agencies_to_ids
         $pair = $ "<div class='pair'></div>"
             ..appendTo $agencySelectors
         $ "<input type='checkbox' class='agency' value='#id' id='chc-#id' checked='checked'/>"
             ..appendTo $pair
         $ "<label for='chc-#id'>#agency</label>"
             ..appendTo $pair
-        $ "<span class='description'>#text</span>"
+        $ "<a href='#link' class='description' data-tooltip='#text' target='_blank'>?</span>"
             ..appendTo $pair
 
     for party, partyId of parties_to_ids
