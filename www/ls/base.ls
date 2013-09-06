@@ -11,11 +11,24 @@ window.parties_to_ids =
     "KSČM" : \kscm
     "KDU-ČSL" : \kdu
 window.agencies_to_ids =
-    "Median": id: \median text: "Recusandae, quisquam cumque aliquid!"
-    "STEM":   id: \stem   text: "Quia, soluta accusantium vero!"
-    "Factum": id: \factum text: "Suscipit, unde tenetur optio!"
-    "CVVM":   id: \cvvm   text: "Ea, corrupti pariatur animi."
-    "Volby":   id: \volby   text: "Volby do Poslanecké sněmovny 2010"
+    "Median":
+        id: \median
+        text: "volební model, 1000+ respondentů, osobní dotazování, stratifikovaný náhodný adresní výběr"
+        link: 'http://www.median.cz/?lang=cs&page=4&sub=5#n31'
+    "STEM":
+        id: \stem
+        text: "stranické preference (podíly preferencí pro jednotlivé strany jsou nižší, než by odpovídalo volebnímu výsledku, protože se do celku počítají i nerozhodnutí), 1000+ respondentů, osobní dotazování, kvótní výběr"
+        link: "http://stem.cz/clanek/2768"
+    "Factum":
+        id: \factum
+        text: "ppm factum: volební model, 900+ respondentů, osobní dotazování, kvótní výběr"
+        link: "http://www.factum.cz/534_podpora-ods-na-historickem-minimu"
+    "CVVM":
+        id: \cvvm
+        text: "volební model, 1000+ respondentů, osobní dotazování, kvótní výběr"
+        link: "http://cvvm.soc.cas.cz/media/com_form2content/documents/c1/a7037/f3/pv130621.pdf"
+    "Volby":
+        id: \volby
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([date, party, percent, agency]) ->
