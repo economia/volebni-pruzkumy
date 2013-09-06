@@ -44,7 +44,7 @@ window.init = (data) ->
         datapoint
     lines.forEach -> it.processDatapoints!
     generateSelectors!
-    generateStories!
+    # generateStories!
     width = $ window .width!
     height = $ window .height!
     window.graph = new Graph '#wrap' lines, {width, height}
