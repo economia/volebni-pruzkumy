@@ -8,9 +8,9 @@ window.parties_to_ids =
     "KSČM" : \kscm
     "VV" : \vv
     "KDU-ČSL" : \kdu
-    "SZ" : \sz
+    "Zelení" : \sz
     "ANO" : \ano
-    "SPOZ" : \spoz
+    "Zemanovci" : \spoz
     "LIDEM" : \lidem
     "LEV 21" : \lev
     "Svobodní" : \svobodni
