@@ -38,6 +38,9 @@ window.Graph = class Graph implements verticalGuide
             ..y ~> @scale_y it.percent
         @datapointSymbol = d3.svg.symbol!
             ..size 45
+        @datapointVolbySymbol = d3.svg.symbol!
+            ..type \square
+            ..size 130
         @registerVerticalGuide!
 
 
@@ -100,7 +103,12 @@ window.Graph = class Graph implements verticalGuide
             .selectAll 'path'
             .data (.datapoints)
             .enter!append \path
-                ..attr \d @datapointSymbol
+                ..attr \d (pt) ~>
+                    if pt.agencyId == \volby
+                        @datapointVolbySymbol!
+                    else
+                        @datapointSymbol!
+
                 ..attr \transform (pt) ~> "translate(#{@scale_x pt.date}, #{@scale_y pt.percent}) scale(0)"
                 ..attr \data-tooltip (pt) ~>
                     escape if pt.agency isnt \Volby
