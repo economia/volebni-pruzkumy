@@ -3,20 +3,20 @@ window.datapoints = []
 window.lines = []
 window.parties_to_ids =
     "ČSSD" : \cssd
-    "VV" : \vv
-    "SPOZ" : \spoz
     "ODS" : \ods
     "TOP09" : \top
-    "SZ" : \sz
     "KSČM" : \kscm
+    "VV" : \vv
     "KDU-ČSL" : \kdu
-    "Suverenita" : \suv
-    "LEV 21" : \lev
-    "Dělnická strana" : \ds
+    "SZ" : \sz
+    "ANO" : \ano
+    "SPOZ" : \spoz
     "LIDEM" : \lidem
+    "LEV 21" : \lev
     "Svobodní" : \svobodni
     "Piráti" : \pirati
-    "ANO" : \ano
+    "Suverenita" : \suv
+    "Dělnická strana" : \ds
 window.agencies_to_ids =
     "Median":
         id: \median
