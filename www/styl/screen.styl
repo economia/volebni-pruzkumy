@@ -74,6 +74,8 @@ body
                     stroke PartyPirati
                 &.lev
                     stroke PartyLev
+                &.ano
+                    stroke PartyANO
                 &.volby
                     stroke-width 1px
                     stroke-dasharray 5, 5
@@ -99,18 +101,20 @@ body
                         fill PartyKSCM
                     &.kdu path
                         fill PartyKDU
-                    &.PartySvobodni path
+                    &.svobodni path
                         fill PartySvobodni
-                    &.PartySuverenita path
+                    &.suverenita path
                         fill PartySuverenita
-                    &.PartyLidem path
+                    &.lidem path
                         fill PartyLidem
-                    &.PartyDS path
+                    &.ds path
                         fill PartyDS
-                    &.PartyPirati path
+                    &.pirati path
                         fill PartyPirati
-                    &.PartyLev path
+                    &.lev path
                         fill PartyLev
+                    &.ano path
+                        fill PartyANO
                     path:first-child
                         display none
 
@@ -198,6 +202,12 @@ body
                         &:hover
                         &.active
                             fill PartyLev
+                &.ano
+                    path
+                        stroke PartyANO
+                        &:hover
+                        &.active
+                            fill PartyANO
 
             path.ghost
                 stroke-width 1px

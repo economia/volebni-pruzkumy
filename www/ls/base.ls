@@ -16,6 +16,7 @@ window.parties_to_ids =
     "LIDEM" : \lidem
     "Svobodní" : \svobodni
     "Piráti" : \pirati
+    "ANO" : \ano
 window.agencies_to_ids =
     "Median":
         id: \median
