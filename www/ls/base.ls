@@ -39,7 +39,7 @@ window.agencies_to_ids =
 window.init = (data) ->
     lines_assoc = {}
     data.pruzkumy .= filter ([date, party, percent, agency]) ->
-        percent.length > 1
+        percent.length > 0
     datapoints = data.pruzkumy.map ([date, party, percent, agency]:datum) ->
         datapoint = new Datapoint datum
         line = lines_assoc[datapoint.lineId]
