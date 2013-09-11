@@ -1,3 +1,9 @@
+if not Modernizr.svg
+    window.init = ->
+    $ "p.fallback" .after '<img src="./fallback.png" alt="" class="fallback">'
+    return
+$ '.fallback' .remove!
+
 new Tooltip!watchElements!
 window.datapoints = []
 window.lines = []
