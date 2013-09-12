@@ -3,6 +3,7 @@ window.verticalGuide =
         @guide = @verticalGuideGroup.append \line
             ..attr \y1 @margin.0
             ..attr \y2 @margin.0 + @height
+            ..attr \opacity 0
 
         attachGuide = (selection) ~>
             selection
