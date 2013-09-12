@@ -1,0 +1,23 @@
+{
+  "name": "volebni-pruzkumy",
+  "version": "0.0.1",
+  "description": "Pět let předvolebních výzkumů v jednom grafu",
+  "main": "index.js",
+  "dependencies": {
+    "stylus": "~0.37.0",
+    "uglify-js": "~2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/economia/volebni-pruzkumy.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/economia/volebni-pruzkumy/issues"
+  }
+}
