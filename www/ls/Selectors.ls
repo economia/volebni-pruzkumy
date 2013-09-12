@@ -56,6 +56,8 @@ window.generateSelectors = ->
                 partySelected := no
             $inputs.each -> parties.push @value
         graph.redraw!
+        _gaq.push ['_trackEvent' 'volebni-pruzkumy' 'filtr' $ele.val!]
+
     $ \body .on \mouseover \label (evt) ->
         $ele = $ @
         $input = $ '#' + $ele.attr \for
