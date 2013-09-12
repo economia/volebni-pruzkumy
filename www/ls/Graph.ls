@@ -41,7 +41,6 @@ window.Graph = class Graph implements verticalGuide
         @datapointVolbySymbol = d3.svg.symbol!
             ..type \square
             ..size 130
-        @registerVerticalGuide!
 
 
     draw: ->
