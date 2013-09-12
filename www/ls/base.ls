@@ -22,7 +22,7 @@ window.parties_to_ids =
     "Svobodní" : \svobodni
     "Piráti" : \pirati
     "Suverenita" : \suv
-    "Dělnická strana" : \ds
+    "DSSS" : \ds
 window.agencies_to_ids =
     "Median":
         id: \median
